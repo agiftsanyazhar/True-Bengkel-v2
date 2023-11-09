@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tipe_motors', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
