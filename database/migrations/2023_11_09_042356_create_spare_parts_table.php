@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('spare_part_id')->unique();
             $table->string('name');
-            $table->string('image');
             $table->integer('stock');
             $table->integer('price');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

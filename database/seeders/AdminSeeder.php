@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
@@ -12,6 +12,16 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $admin = [
+            [
+                'name' => 'Admin',
+                'email' => 'admin@gmail.com',
+                'user_id' => 1,
+            ],
+        ];
+
+        foreach ($admin as $item) {
+            Admin::create($item);
+        }
     }
 }

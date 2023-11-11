@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('motors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('brand_id')
+                ->constrained('brands')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('tipe_motor_id')
                 ->constrained('tipe_motors')
                 ->onUpdate('cascade')
