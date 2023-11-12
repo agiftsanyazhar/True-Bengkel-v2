@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\OrderDetail;
-use App\Http\Requests\StoreOrderDetailRequest;
-use App\Http\Requests\UpdateOrderDetailRequest;
+use App\Http\Requests\{
+    StoreOrderDetailRequest,
+    UpdateOrderDetailRequest,
+};
 
 class OrderDetailController extends Controller
 {

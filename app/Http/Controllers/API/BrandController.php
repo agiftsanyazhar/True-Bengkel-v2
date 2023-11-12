@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\SparePart;
-use App\Http\Requests\StoreSparePartRequest;
-use App\Http\Requests\UpdateSparePartRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Http\Requests\{
+    StoreBrandRequest,
+    UpdateBrandRequest
+};
 
-class SparePartController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class SparePartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSparePartRequest $request)
+    public function store(StoreBrandRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class SparePartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SparePart $sparePart)
+    public function show(Brand $brand)
     {
         //
     }
@@ -43,7 +46,7 @@ class SparePartController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SparePart $sparePart)
+    public function edit(Brand $brand)
     {
         //
     }
@@ -51,7 +54,7 @@ class SparePartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSparePartRequest $request, SparePart $sparePart)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
         //
     }
@@ -59,7 +62,7 @@ class SparePartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SparePart $sparePart)
+    public function destroy(Brand $brand)
     {
         //
     }

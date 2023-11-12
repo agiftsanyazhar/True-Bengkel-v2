@@ -22,6 +22,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('qty');
+            $table->integer('harga_satuan');
             $table->timestamps();
         });
     }

@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Kendaraan;
-use App\Http\Requests\StoreKendaraanRequest;
-use App\Http\Requests\UpdateKendaraanRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Motor;
+use App\Http\Requests\{
+    StoreMotorRequest,
+    UpdateMotorRequest,
+};
 
-class KendaraanController extends Controller
+class MotorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class KendaraanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreKendaraanRequest $request)
+    public function store(StoreMotorRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class KendaraanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kendaraan $kendaraan)
+    public function show(Motor $motor)
     {
         //
     }
@@ -43,7 +46,7 @@ class KendaraanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kendaraan $kendaraan)
+    public function edit(Motor $motor)
     {
         //
     }
@@ -51,7 +54,7 @@ class KendaraanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKendaraanRequest $request, Kendaraan $kendaraan)
+    public function update(UpdateMotorRequest $request, Motor $motor)
     {
         //
     }
@@ -59,7 +62,7 @@ class KendaraanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kendaraan $kendaraan)
+    public function destroy(Motor $motor)
     {
         //
     }

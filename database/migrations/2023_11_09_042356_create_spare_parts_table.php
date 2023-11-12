@@ -14,10 +14,18 @@ return new class extends Migration
         Schema::create('spare_parts', function (Blueprint $table) {
             $table->id();
             $table->string('spare_part_id')->unique();
+            $table->foreignId('brand_id')
+                ->constrained('brands')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('tipe_motor_id')
+                ->constrained('tipe_motors')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('name');
+            $table->string('image')->nullable();
             $table->integer('stock');
             $table->integer('price');
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

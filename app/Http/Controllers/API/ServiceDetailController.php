@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Pegawai;
-use App\Http\Requests\StorePegawaiRequest;
-use App\Http\Requests\UpdatePegawaiRequest;
+use App\Http\Controllers\Controller;
+use App\Models\ServiceDetail;
+use App\Http\Requests\{
+    StoreServiceDetailRequest,
+    UpdateServiceDetailRequest,
+};
 
-class PegawaiController extends Controller
+class ServiceDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class PegawaiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePegawaiRequest $request)
+    public function store(StoreServiceDetailRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class PegawaiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pegawai $pegawai)
+    public function show(ServiceDetail $serviceDetail)
     {
         //
     }
@@ -43,7 +46,7 @@ class PegawaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pegawai $pegawai)
+    public function edit(ServiceDetail $serviceDetail)
     {
         //
     }
@@ -51,7 +54,7 @@ class PegawaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePegawaiRequest $request, Pegawai $pegawai)
+    public function update(UpdateServiceDetailRequest $request, ServiceDetail $serviceDetail)
     {
         //
     }
@@ -59,7 +62,7 @@ class PegawaiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pegawai $pegawai)
+    public function destroy(ServiceDetail $serviceDetail)
     {
         //
     }

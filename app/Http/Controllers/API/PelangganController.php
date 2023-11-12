@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\ServiceDetail;
-use App\Http\Requests\StoreServiceDetailRequest;
-use App\Http\Requests\UpdateServiceDetailRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Pelanggan;
+use App\Http\Requests\{
+    StorePelangganRequest,
+    UpdatePelangganRequest,
+};
 
-class ServiceDetailController extends Controller
+class PelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class ServiceDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreServiceDetailRequest $request)
+    public function store(StorePelangganRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class ServiceDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ServiceDetail $serviceDetail)
+    public function show(Pelanggan $pelanggan)
     {
         //
     }
@@ -43,7 +46,7 @@ class ServiceDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ServiceDetail $serviceDetail)
+    public function edit(Pelanggan $pelanggan)
     {
         //
     }
@@ -51,7 +54,7 @@ class ServiceDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServiceDetailRequest $request, ServiceDetail $serviceDetail)
+    public function update(UpdatePelangganRequest $request, Pelanggan $pelanggan)
     {
         //
     }
@@ -59,7 +62,7 @@ class ServiceDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ServiceDetail $serviceDetail)
+    public function destroy(Pelanggan $pelanggan)
     {
         //
     }

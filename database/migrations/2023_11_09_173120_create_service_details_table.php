@@ -18,6 +18,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('name');
+            $table->integer('harga_jasa');
             $table->timestamps();
         });
     }

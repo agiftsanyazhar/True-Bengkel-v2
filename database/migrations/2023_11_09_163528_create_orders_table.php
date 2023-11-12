@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_code')->unique()->default('ODR-' . Carbon::now()->format('dmYHis'));
-            $table->integer('is_service?');
-            $table->integer('status')->default(0);
+            $table->string('order_code')->default('ODR-' . Carbon::now()->format('dmYHis'));
+            $table->foreignId('pelanggan_id')
+                ->constrained('pelanggans')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->integer('is_service');
+            $table->integer('is_paid')->default(0);
             $table->string('payment_at')->default(0);
             $table->integer('total_shopping');
             $table->string('bukti_pembayaran');

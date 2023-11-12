@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Brand;
-use App\Http\Requests\StoreBrandRequest;
-use App\Http\Requests\UpdateBrandRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Pegawai;
+use App\Http\Requests\{
+    StorePegawaiRequest,
+    UpdatePegawaiRequest,
+};
 
-class BrandController extends Controller
+class PegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBrandRequest $request)
+    public function store(StorePegawaiRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Brand $brand)
+    public function show(Pegawai $pegawai)
     {
         //
     }
@@ -43,7 +46,7 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand)
+    public function edit(Pegawai $pegawai)
     {
         //
     }
@@ -51,7 +54,7 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(UpdatePegawaiRequest $request, Pegawai $pegawai)
     {
         //
     }
@@ -59,7 +62,7 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy(Pegawai $pegawai)
     {
         //
     }

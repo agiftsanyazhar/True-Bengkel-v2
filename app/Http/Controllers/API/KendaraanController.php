@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Jabatan;
-use App\Http\Requests\StoreJabatanRequest;
-use App\Http\Requests\UpdateJabatanRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Kendaraan;
+use App\Http\Requests\{
+    StoreKendaraanRequest,
+    UpdateKendaraanRequest,
+};
 
-class JabatanController extends Controller
+class KendaraanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class JabatanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJabatanRequest $request)
+    public function store(StoreKendaraanRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class JabatanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Jabatan $jabatan)
+    public function show(Kendaraan $kendaraan)
     {
         //
     }
@@ -43,7 +46,7 @@ class JabatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Jabatan $jabatan)
+    public function edit(Kendaraan $kendaraan)
     {
         //
     }
@@ -51,7 +54,7 @@ class JabatanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJabatanRequest $request, Jabatan $jabatan)
+    public function update(UpdateKendaraanRequest $request, Kendaraan $kendaraan)
     {
         //
     }
@@ -59,7 +62,7 @@ class JabatanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jabatan $jabatan)
+    public function destroy(Kendaraan $kendaraan)
     {
         //
     }

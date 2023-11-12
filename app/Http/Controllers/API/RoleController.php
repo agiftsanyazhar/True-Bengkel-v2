@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Pelanggan;
-use App\Http\Requests\StorePelangganRequest;
-use App\Http\Requests\UpdatePelangganRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Http\Requests\{
+    StoreRoleRequest,
+    UpdateRoleRequest,
+};
 
-class PelangganController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class PelangganController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePelangganRequest $request)
+    public function store(StoreRoleRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class PelangganController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pelanggan $pelanggan)
+    public function show(Role $role)
     {
         //
     }
@@ -43,7 +46,7 @@ class PelangganController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pelanggan $pelanggan)
+    public function edit(Role $role)
     {
         //
     }
@@ -51,7 +54,7 @@ class PelangganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePelangganRequest $request, Pelanggan $pelanggan)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
         //
     }
@@ -59,7 +62,7 @@ class PelangganController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelanggan $pelanggan)
+    public function destroy(Role $role)
     {
         //
     }

@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Motor;
-use App\Http\Requests\StoreMotorRequest;
-use App\Http\Requests\UpdateMotorRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Jabatan;
+use App\Http\Requests\{
+    StoreJabatanRequest,
+    UpdateJabatanRequest,
+};
 
-class MotorController extends Controller
+class JabatanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +30,7 @@ class MotorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMotorRequest $request)
+    public function store(StoreJabatanRequest $request)
     {
         //
     }
@@ -35,7 +38,7 @@ class MotorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Motor $motor)
+    public function show(Jabatan $jabatan)
     {
         //
     }
@@ -43,7 +46,7 @@ class MotorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Motor $motor)
+    public function edit(Jabatan $jabatan)
     {
         //
     }
@@ -51,7 +54,7 @@ class MotorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMotorRequest $request, Motor $motor)
+    public function update(UpdateJabatanRequest $request, Jabatan $jabatan)
     {
         //
     }
@@ -59,7 +62,7 @@ class MotorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Motor $motor)
+    public function destroy(Jabatan $jabatan)
     {
         //
     }

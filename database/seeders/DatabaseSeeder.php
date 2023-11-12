@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
             TipeMotorSeeder::class,
             BrandSeeder::class,
             MotorSeeder::class,
+            SparePartSeeder::class,
+            KendaraanSeeder::class,
+            OrderSeeder::class,
+            OrderDetailSeeder::class,
+            ServiceDetailSeeder::class,
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
