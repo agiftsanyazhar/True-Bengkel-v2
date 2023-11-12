@@ -19,6 +19,7 @@ class PegawaiSeeder extends Seeder
                 'phone' => '08123456789',
                 'alamat' => 'Surabaya',
                 'user_id' => 2,
+                'jabatan_id' => 1,
             ],
             [
                 'name' => 'Pegawai 2',
@@ -26,6 +27,7 @@ class PegawaiSeeder extends Seeder
                 'phone' => '089483729182',
                 'alamat' => 'Gresik',
                 'user_id' => 3,
+                'jabatan_id' => 2,
             ],
             [
                 'name' => 'Pegawai 3',
@@ -33,6 +35,7 @@ class PegawaiSeeder extends Seeder
                 'phone' => '083648291842',
                 'alamat' => 'Sidoarjo',
                 'user_id' => 4,
+                'jabatan_id' => 3,
             ],
         ];
 

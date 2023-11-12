@@ -21,6 +21,10 @@ return new class extends Migration
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('jabatan_id')
+                ->constrained('jabatans')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
