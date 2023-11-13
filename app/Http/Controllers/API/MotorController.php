@@ -16,7 +16,13 @@ class MotorController extends Controller
      */
     public function index()
     {
-        //
+        $motor = Motor::with('brand', 'tipeMotor')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $motor,
+        ], 200);
     }
 
     /**

@@ -16,7 +16,13 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        $jabatan = Jabatan::get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $jabatan,
+        ], 200);
     }
 
     /**

@@ -16,7 +16,13 @@ class TipeMotorController extends Controller
      */
     public function index()
     {
-        //
+        $tipeMotor = TipeMotor::get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $tipeMotor,
+        ], 200);
     }
 
     /**

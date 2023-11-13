@@ -16,7 +16,13 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        //
+        $pegawai = Pegawai::with('user')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $pegawai,
+        ], 200);
     }
 
     /**

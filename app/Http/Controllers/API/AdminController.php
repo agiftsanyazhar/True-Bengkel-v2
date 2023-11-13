@@ -16,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admin = Admin::with('pengirim', 'penerima')->orderBy('created_at', 'DESC')->get();
+        $admin = Admin::with('user')->get();
 
         return response()->json([
             'success' => true,

@@ -3,25 +3,22 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kendaraan;
-use App\Http\Requests\{
-    StoreKendaraanRequest,
-    UpdateKendaraanRequest,
-};
+use App\Models\User;
+use Illuminate\Http\Request;
 
-class KendaraanController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $kendaraan = Kendaraan::with('pelanggan', 'brand', 'tipeMotor')->get();
+        $user = User::with('role')->get();
 
         return response()->json([
             'success' => true,
             'message' => 'Success',
-            'data' => $kendaraan,
+            'data' => $user,
         ], 200);
     }
 
@@ -36,7 +33,7 @@ class KendaraanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreKendaraanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -44,7 +41,7 @@ class KendaraanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kendaraan $kendaraan)
+    public function show(user $user)
     {
         //
     }
@@ -52,7 +49,7 @@ class KendaraanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kendaraan $kendaraan)
+    public function edit(user $user)
     {
         //
     }
@@ -60,7 +57,7 @@ class KendaraanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKendaraanRequest $request, Kendaraan $kendaraan)
+    public function update(Request $request, user $user)
     {
         //
     }
@@ -68,7 +65,7 @@ class KendaraanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kendaraan $kendaraan)
+    public function destroy(user $user)
     {
         //
     }

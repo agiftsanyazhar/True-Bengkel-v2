@@ -32,21 +32,21 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->group(base_path('routes/api.php'));
+            Route::middleware('api')
+                ->prefix('api')
+                ->group(base_path('routes/api/admin.php'));
 
-            // $apiRoutePath = base_path('routes/api');
-            // $apiRouteFiles = File::files($apiRoutePath);
+            $apiRoutePath = base_path('routes/api');
+            $apiRouteFiles = File::files($apiRoutePath);
 
-            // foreach ($apiRouteFiles as $routeFile) {
-            //     $filename = $routeFile->getFilename();
-            //     if ($filename !== 'api.php') {
-            //         Route::middleware('api')
-            //             ->prefix('api')
-            //             ->group($apiRoutePath . '/' . $filename);
-            //     }
-            // }
+            foreach ($apiRouteFiles as $routeFile) {
+                $filename = $routeFile->getFilename();
+                if ($filename !== 'api.php') {
+                    Route::middleware('api')
+                        ->prefix('api')
+                        ->group($apiRoutePath . '/' . $filename);
+                }
+            }
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));

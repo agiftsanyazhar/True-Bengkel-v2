@@ -16,7 +16,13 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        //
+        $pelanggan = Pelanggan::with('user')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $pelanggan,
+        ], 200);
     }
 
     /**

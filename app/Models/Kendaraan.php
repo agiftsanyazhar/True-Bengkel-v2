@@ -21,4 +21,24 @@ class Kendaraan extends Model
     {
         return $this->belongsTo(Pelanggan::class);
     }
+
+    /**
+     * Get the brand that owns the Kendaraan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    /**
+     * Get the tipeMotor that owns the Kendaraan
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipeMotor(): BelongsTo
+    {
+        return $this->belongsTo(TipeMotor::class);
+    }
 }

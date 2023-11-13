@@ -16,7 +16,13 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brand = Brand::get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $brand,
+        ], 200);
     }
 
     /**

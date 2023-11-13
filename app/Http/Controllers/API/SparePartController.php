@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\SparePart;
 use App\Http\Requests\{
     StoreSparePartRequest,
@@ -15,7 +16,13 @@ class SparePartController extends Controller
      */
     public function index()
     {
-        //
+        $sparePart = SparePart::with('brand', 'tipeMotor')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $sparePart,
+        ], 200);
     }
 
     /**
