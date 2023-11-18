@@ -34,19 +34,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
-                ->group(base_path('routes/api/admin.php'));
-
-            $apiRoutePath = base_path('routes/api');
-            $apiRouteFiles = File::files($apiRoutePath);
-
-            foreach ($apiRouteFiles as $routeFile) {
-                $filename = $routeFile->getFilename();
-                if ($filename !== 'api.php') {
-                    Route::middleware('api')
-                        ->prefix('api')
-                        ->group($apiRoutePath . '/' . $filename);
-                }
-            }
+                ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
