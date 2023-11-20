@@ -17,10 +17,13 @@ return new class extends Migration
             $table->longText('headline');
             $table->longText('about');
             $table->longText('location');
+            $table->longText('map');
             $table->string('email');
             $table->string('phone');
             $table->string('opening_hours');
             $table->string('closing_hours');
+            $table->string('hero_image');
+            $table->string('about_image');
             $table->timestamps();
         });
     }

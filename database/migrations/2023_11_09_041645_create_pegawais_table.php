@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('alamat');
+            $table->string('description');
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->onUpdate('cascade')

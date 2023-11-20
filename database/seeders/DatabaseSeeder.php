@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             OrderDetailSeeder::class,
             ServiceDetailSeeder::class,
             AboutSeeder::class,
+            GallerySeeder::class,
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

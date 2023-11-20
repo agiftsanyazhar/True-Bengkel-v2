@@ -16,7 +16,7 @@ class ServiceDetailSeeder extends Seeder
             [
                 'order_id' => 2,
                 'name' => 'ganti_oli',
-                'harga_jasa' => 10000,
+                'harga_jasa' => rand(1000, 999999),
             ],
         ];
 

@@ -15,24 +15,24 @@ class OrderSeeder extends Seeder
     {
         $order = [
             [
-                'pelanggan_id' => 1,
-                'is_service' => 0,
+                'pelanggan_id' => rand(1, 3),
+                'is_service' => rand(0, 1),
                 'payment_at' => Carbon::now(),
-                'total_shopping' => 1500000,
+                'total_shopping' => 0,
                 'bukti_pembayaran' => 'uploads/bukti-pembayaran/bukti-pembayaran-1.jpg',
             ],
             [
-                'pelanggan_id' => 2,
-                'is_service' => 1,
+                'pelanggan_id' => rand(1, 3),
+                'is_service' => rand(0, 1),
                 'payment_at' => Carbon::now(),
-                'total_shopping' => 350000,
+                'total_shopping' => 0,
                 'bukti_pembayaran' => 'uploads/bukti-pembayaran/bukti-pembayaran-2.jpg',
             ],
             [
-                'pelanggan_id' => 3,
-                'is_service' => 0,
+                'pelanggan_id' => rand(1, 3),
+                'is_service' => rand(0, 1),
                 'payment_at' => Carbon::now(),
-                'total_shopping' => 250000,
+                'total_shopping' => 0,
                 'bukti_pembayaran' => 'uploads/bukti-pembayaran/bukti-pembayaran-3.jpg',
             ],
         ];

@@ -16,8 +16,8 @@ class KendaraanSeeder extends Seeder
         $kendaraan = [
             [
                 'stnk' => $this->generateRandomString(4),
-                'pelanggan_id' => '1',
-                'tipe_motor_id' => '1',
+                'pelanggan_id' => rand(1, 3),
+                'tipe_motor_id' => rand(1, 10),
                 'no_mesin' => $this->generateRandomString(7),
                 'brand_id' => '1',
                 'no_rangka' => $this->generateRandomString(8),
@@ -26,8 +26,8 @@ class KendaraanSeeder extends Seeder
             ],
             [
                 'stnk' => $this->generateRandomString(4),
-                'pelanggan_id' => '1',
-                'tipe_motor_id' => '2',
+                'pelanggan_id' => rand(1, 3),
+                'tipe_motor_id' => rand(1, 10),
                 'no_mesin' => $this->generateRandomString(7),
                 'brand_id' => '1',
                 'no_rangka' => $this->generateRandomString(8),
@@ -36,8 +36,8 @@ class KendaraanSeeder extends Seeder
             ],
             [
                 'stnk' => $this->generateRandomString(4),
-                'pelanggan_id' => '2',
-                'tipe_motor_id' => '3',
+                'pelanggan_id' => rand(1, 3),
+                'tipe_motor_id' => rand(1, 10),
                 'no_mesin' => $this->generateRandomString(7),
                 'brand_id' => '2',
                 'no_rangka' => $this->generateRandomString(8),
@@ -46,8 +46,8 @@ class KendaraanSeeder extends Seeder
             ],
             [
                 'stnk' => $this->generateRandomString(4),
-                'pelanggan_id' => '2',
-                'tipe_motor_id' => '4',
+                'pelanggan_id' => rand(1, 3),
+                'tipe_motor_id' => rand(1, 10),
                 'no_mesin' => $this->generateRandomString(7),
                 'brand_id' => '2',
                 'no_rangka' => $this->generateRandomString(8),
@@ -56,8 +56,8 @@ class KendaraanSeeder extends Seeder
             ],
             [
                 'stnk' => $this->generateRandomString(4),
-                'pelanggan_id' => '3',
-                'tipe_motor_id' => '5',
+                'pelanggan_id' => rand(1, 3),
+                'tipe_motor_id' => rand(1, 10),
                 'no_mesin' => $this->generateRandomString(7),
                 'brand_id' => '3',
                 'no_rangka' => $this->generateRandomString(8),
@@ -66,8 +66,8 @@ class KendaraanSeeder extends Seeder
             ],
             [
                 'stnk' => $this->generateRandomString(4),
-                'pelanggan_id' => '3',
-                'tipe_motor_id' => '6',
+                'pelanggan_id' => rand(1, 3),
+                'tipe_motor_id' => rand(1, 10),
                 'no_mesin' => $this->generateRandomString(7),
                 'brand_id' => '3',
                 'no_rangka' => $this->generateRandomString(8),
