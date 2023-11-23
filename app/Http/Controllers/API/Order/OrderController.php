@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\{
@@ -48,7 +48,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function detailOrder($order_id)
+    public function show($order_id)
     {
         $orderDetail = OrderDetail::where('order_id', $order_id)->get();
         $serviceDetail = ServiceDetail::where('order_id', $order_id)->get();

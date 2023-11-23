@@ -1,27 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jabatan;
-use App\Http\Requests\{
-    StoreJabatanRequest,
-    UpdateJabatanRequest,
-};
+use App\Models\User;
+use Illuminate\Http\Request;
 
-class JabatanController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $jabatan = Jabatan::get();
+        $user = User::with('role')->get();
 
         return response()->json([
             'success' => true,
             'message' => 'Success',
-            'data' => $jabatan,
+            'data' => $user,
         ], 200);
     }
 
@@ -36,7 +33,7 @@ class JabatanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJabatanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -44,7 +41,7 @@ class JabatanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Jabatan $jabatan)
+    public function show(user $user)
     {
         //
     }
@@ -52,7 +49,7 @@ class JabatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Jabatan $jabatan)
+    public function edit(user $user)
     {
         //
     }
@@ -60,7 +57,7 @@ class JabatanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJabatanRequest $request, Jabatan $jabatan)
+    public function update(Request $request, user $user)
     {
         //
     }
@@ -68,7 +65,7 @@ class JabatanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jabatan $jabatan)
+    public function destroy(user $user)
     {
         //
     }

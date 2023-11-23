@@ -1,24 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Master;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\About;
+use App\Http\Requests\{
+    StoreAboutRequest,
+    UpdateAboutRequest
+};
 
-class UserController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $user = User::with('role')->get();
+        $about = About::get();
 
         return response()->json([
             'success' => true,
             'message' => 'Success',
-            'data' => $user,
+            'data' => $about,
         ], 200);
     }
 
@@ -33,7 +36,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAboutRequest $request)
     {
         //
     }
@@ -41,7 +44,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(user $user)
+    public function show(About $about)
     {
         //
     }
@@ -49,7 +52,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user $user)
+    public function edit(About $about)
     {
         //
     }
@@ -57,7 +60,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, user $user)
+    public function update(UpdateAboutRequest $request, About $about)
     {
         //
     }
@@ -65,7 +68,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user $user)
+    public function destroy(About $about)
     {
         //
     }

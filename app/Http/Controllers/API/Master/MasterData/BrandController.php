@@ -1,22 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Master\MasterData;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrderDetail;
+use App\Models\Brand;
 use App\Http\Requests\{
-    StoreOrderDetailRequest,
-    UpdateOrderDetailRequest,
+    StoreBrandRequest,
+    UpdateBrandRequest
 };
 
-class OrderDetailController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $brand = Brand::get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $brand,
+        ], 200);
     }
 
     /**
@@ -30,7 +36,7 @@ class OrderDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrderDetailRequest $request)
+    public function store(StoreBrandRequest $request)
     {
         //
     }
@@ -38,7 +44,7 @@ class OrderDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrderDetail $orderDetail)
+    public function show(Brand $brand)
     {
         //
     }
@@ -46,7 +52,7 @@ class OrderDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OrderDetail $orderDetail)
+    public function edit(Brand $brand)
     {
         //
     }
@@ -54,7 +60,7 @@ class OrderDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderDetailRequest $request, OrderDetail $orderDetail)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
         //
     }
@@ -62,7 +68,7 @@ class OrderDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderDetail $orderDetail)
+    public function destroy(Brand $brand)
     {
         //
     }

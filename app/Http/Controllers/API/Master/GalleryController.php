@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Master;
 
 use App\Http\Controllers\Controller;
-use App\Models\TipeMotor;
+use App\Models\Gallery;
 use App\Http\Requests\{
-    StoreTipeMotorRequest,
-    UpdateTipeMotorRequest,
+    StoreGalleryRequest,
+    UpdateGalleryRequest
 };
 
-class TipeMotorController extends Controller
+class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tipeMotor = TipeMotor::get();
+        $gallery = Gallery::get();
 
         return response()->json([
             'success' => true,
             'message' => 'Success',
-            'data' => $tipeMotor,
+            'data' => $gallery,
         ], 200);
     }
 
@@ -36,7 +36,7 @@ class TipeMotorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTipeMotorRequest $request)
+    public function store(StoreGalleryRequest $request)
     {
         //
     }
@@ -44,7 +44,7 @@ class TipeMotorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TipeMotor $tipeMotor)
+    public function show(Gallery $gallery)
     {
         //
     }
@@ -52,7 +52,7 @@ class TipeMotorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TipeMotor $tipeMotor)
+    public function edit(Gallery $gallery)
     {
         //
     }
@@ -60,7 +60,7 @@ class TipeMotorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTipeMotorRequest $request, TipeMotor $tipeMotor)
+    public function update(UpdateGalleryRequest $request, Gallery $gallery)
     {
         //
     }
@@ -68,7 +68,7 @@ class TipeMotorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TipeMotor $tipeMotor)
+    public function destroy(Gallery $gallery)
     {
         //
     }

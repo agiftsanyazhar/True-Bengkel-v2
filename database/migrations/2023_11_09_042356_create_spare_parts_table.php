@@ -23,6 +23,8 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('name');
+            $table->string('headline');
+            $table->longText('description');
             $table->string('image')->nullable();
             $table->integer('stock');
             $table->integer('price');

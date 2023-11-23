@@ -1,18 +1,31 @@
 <?php
 
 use App\Http\Controllers\API\{
-    AboutController,
-    AdminController,
-    BrandController,
-    JabatanController,
     KendaraanController,
     MotorController,
-    OrderController,
-    PegawaiController,
-    PelangganController,
     RoleController,
     SparePartController,
+};
+use App\Http\Controllers\API\Auth\{
+    LoginController,
+    RegisterController,
+};
+use App\Http\Controllers\API\Master\{
+    AboutController,
+    GalleryController,
+};
+use App\Http\Controllers\API\Master\MasterData\{
+    BrandController,
+    JabatanController,
     TipeMotorController,
+};
+use App\Http\Controllers\API\Order\{
+    OrderController,
+};
+use App\Http\Controllers\API\User\{
+    AdminController,
+    PegawaiController,
+    PelangganController,
     UserController,
 };
 use Illuminate\Http\Request;
@@ -55,10 +68,20 @@ Route::prefix('brand')->name('brand.')->group(function () {
 });
 
 // --------------------------------------------------------------------------
+// Gallery
+// --------------------------------------------------------------------------
+Route::prefix('gallery')->name('gallery.')->group(function () {
+    Route::get('/', [GalleryController::class, 'index'])->name('index');
+});
+
+// --------------------------------------------------------------------------
 // Jabatan
 // --------------------------------------------------------------------------
 Route::prefix('jabatan')->name('jabatan.')->group(function () {
     Route::get('/', [JabatanController::class, 'index'])->name('index');
+    Route::post('/store', [JabatanController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [JabatanController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [JabatanController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -80,6 +103,9 @@ Route::prefix('motor')->name('motor.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('index');
+    Route::prefix('detail')->name('detail.')->group(function () {
+        Route::get('/{order_id}', [OrderController::class, 'show'])->name('show');
+    });
 });
 
 // --------------------------------------------------------------------------
@@ -121,5 +147,13 @@ Route::prefix('tipe-motor')->name('tipe-motor.')->group(function () {
 // User
 // --------------------------------------------------------------------------
 Route::prefix('user')->name('user.')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('/get-all-user', [UserController::class, 'index'])->name('get-all-user');
+});
+
+// --------------------------------------------------------------------------
+// Auth
+// --------------------------------------------------------------------------
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('/login', LoginController::class)->name('login');
+    Route::post('/register', RegisterController::class)->name('register');
 });

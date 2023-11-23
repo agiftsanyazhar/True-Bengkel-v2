@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\Pegawai;
 use App\Http\Requests\{
-    StoreAdminRequest,
-    UpdateAdminRequest,
+    StorePegawaiRequest,
+    UpdatePegawaiRequest,
 };
 
-class AdminController extends Controller
+class PegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $admin = Admin::with('user')->get();
+        $pegawai = Pegawai::with('user')->get();
 
         return response()->json([
             'success' => true,
             'message' => 'Success',
-            'data' => $admin,
+            'data' => $pegawai,
         ], 200);
     }
 
@@ -36,7 +36,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAdminRequest $request)
+    public function store(StorePegawaiRequest $request)
     {
         //
     }
@@ -44,7 +44,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Admin $admin)
+    public function show(Pegawai $pegawai)
     {
         //
     }
@@ -52,7 +52,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $admin)
+    public function edit(Pegawai $pegawai)
     {
         //
     }
@@ -60,7 +60,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdminRequest $request, Admin $admin)
+    public function update(UpdatePegawaiRequest $request, Pegawai $pegawai)
     {
         //
     }
@@ -68,7 +68,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Admin $admin)
+    public function destroy(Pegawai $pegawai)
     {
         //
     }

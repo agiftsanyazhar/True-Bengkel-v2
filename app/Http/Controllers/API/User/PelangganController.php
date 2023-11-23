@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
+use App\Models\Pelanggan;
 use App\Http\Requests\{
-    StoreAboutRequest,
-    UpdateAboutRequest
+    StorePelangganRequest,
+    UpdatePelangganRequest,
 };
 
-class AboutController extends Controller
+class PelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $about = About::get();
+        $pelanggan = Pelanggan::with('user')->get();
 
         return response()->json([
             'success' => true,
             'message' => 'Success',
-            'data' => $about,
+            'data' => $pelanggan,
         ], 200);
     }
 
@@ -36,7 +36,7 @@ class AboutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAboutRequest $request)
+    public function store(StorePelangganRequest $request)
     {
         //
     }
@@ -44,7 +44,7 @@ class AboutController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(About $about)
+    public function show(Pelanggan $pelanggan)
     {
         //
     }
@@ -52,7 +52,7 @@ class AboutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(About $about)
+    public function edit(Pelanggan $pelanggan)
     {
         //
     }
@@ -60,7 +60,7 @@ class AboutController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAboutRequest $request, About $about)
+    public function update(UpdatePelangganRequest $request, Pelanggan $pelanggan)
     {
         //
     }
@@ -68,7 +68,7 @@ class AboutController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(About $about)
+    public function destroy(Pelanggan $pelanggan)
     {
         //
     }

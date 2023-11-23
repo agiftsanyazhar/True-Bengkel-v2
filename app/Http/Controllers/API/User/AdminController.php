@@ -1,22 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\ServiceDetail;
+use App\Models\Admin;
 use App\Http\Requests\{
-    StoreServiceDetailRequest,
-    UpdateServiceDetailRequest,
+    StoreAdminRequest,
+    UpdateAdminRequest,
 };
 
-class ServiceDetailController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $admin = Admin::with('user')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $admin,
+        ], 200);
     }
 
     /**
@@ -30,7 +36,7 @@ class ServiceDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreServiceDetailRequest $request)
+    public function store(StoreAdminRequest $request)
     {
         //
     }
@@ -38,7 +44,7 @@ class ServiceDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ServiceDetail $serviceDetail)
+    public function show(Admin $admin)
     {
         //
     }
@@ -46,7 +52,7 @@ class ServiceDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ServiceDetail $serviceDetail)
+    public function edit(Admin $admin)
     {
         //
     }
@@ -54,7 +60,7 @@ class ServiceDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServiceDetailRequest $request, ServiceDetail $serviceDetail)
+    public function update(UpdateAdminRequest $request, Admin $admin)
     {
         //
     }
@@ -62,7 +68,7 @@ class ServiceDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ServiceDetail $serviceDetail)
+    public function destroy(Admin $admin)
     {
         //
     }

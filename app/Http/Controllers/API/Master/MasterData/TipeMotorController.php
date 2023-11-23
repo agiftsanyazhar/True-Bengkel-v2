@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Master\MasterData;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
+use App\Models\TipeMotor;
 use App\Http\Requests\{
-    StoreBrandRequest,
-    UpdateBrandRequest
+    StoreTipeMotorRequest,
+    UpdateTipeMotorRequest,
 };
 
-class BrandController extends Controller
+class TipeMotorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $brand = Brand::get();
+        $tipeMotor = TipeMotor::get();
 
         return response()->json([
             'success' => true,
             'message' => 'Success',
-            'data' => $brand,
+            'data' => $tipeMotor,
         ], 200);
     }
 
@@ -36,7 +36,7 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBrandRequest $request)
+    public function store(StoreTipeMotorRequest $request)
     {
         //
     }
@@ -44,7 +44,7 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Brand $brand)
+    public function show(TipeMotor $tipeMotor)
     {
         //
     }
@@ -52,7 +52,7 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand)
+    public function edit(TipeMotor $tipeMotor)
     {
         //
     }
@@ -60,7 +60,7 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(UpdateTipeMotorRequest $request, TipeMotor $tipeMotor)
     {
         //
     }
@@ -68,7 +68,7 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy(TipeMotor $tipeMotor)
     {
         //
     }
