@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('headline');
             $table->longText('description');
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->integer('stock');
             $table->integer('price');
             $table->string('slug');

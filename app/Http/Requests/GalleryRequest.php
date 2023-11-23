@@ -3,18 +3,23 @@
 namespace App\Http\Requests;
 
 use App\Models\{
-    Admin,
-    User,
+    Gallery,
 };
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\{
-    Hash,
     Log,
+    Storage,
 };
-use Illuminate\Support\Str;
 
-class AdminRequest extends FormRequest
+class GalleryRequest extends FormRequest
 {
+    private $uploadPath;
+
+    public function __construct()
+    {
+        $this->uploadPath = 'uploads/gallery/';
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -32,31 +37,24 @@ class AdminRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|email:rfc,dns|unique:users,email',
-            'password' => 'required|min:8',
-            'role_id' => 'integer',
         ];
     }
 
     public function store($request)
     {
         try {
-            $this->validated();
+            $data = $this->validated();
 
-            $user = User::create([
-                'name' => Str::title($request->name),
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role_id' => 1,
-            ]);
+            if ($request->hasFile('image')) {
+                $imageName = $request->validate([
+                    'image' => 'mimes:jpeg,jpg,png|max:2048'
+                ]);
 
-            $userId = $user->id;
+                $imageName = $request->file('image');
+                $data['image'] = $imageName->store($this->uploadPath);
+            }
 
-            $admin = Admin::create([
-                'name' => Str::title($request->name),
-                'email' => $request->email,
-                'user_id' => $userId,
-            ]);
+            $gallery = Gallery::create($data);
 
             $success = true;
             $message = 'Success';
@@ -70,7 +68,7 @@ class AdminRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $admin,
+            'data' => $gallery,
         ];
     }
 
@@ -79,16 +77,19 @@ class AdminRequest extends FormRequest
         try {
             $data = $this->validated();
 
-            $admin = Admin::findOrFail($request->id);
+            $gallery = Gallery::findOrFail($request->id);
 
-            $admin->update($data);
+            if ($request->hasFile('image')) {
+                $imageName = $request->validate([
+                    'image' => 'mimes:jpeg,jpg,png|max:2048'
+                ]);
 
-            User::where('id', $admin->user->id)->update([
-                'name' => Str::title($request->name),
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role_id' => 1,
-            ]);
+                $imageName = $request->file('image');
+                $data['image'] = $imageName->store($this->uploadPath);
+                Storage::delete($gallery->image);
+            }
+
+            $gallery->update($data);
 
             $success = true;
             $message = 'Success';
@@ -102,7 +103,7 @@ class AdminRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $admin,
+            'data' => $gallery,
         ];
     }
 }

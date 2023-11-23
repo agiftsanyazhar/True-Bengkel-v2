@@ -32,7 +32,7 @@ class PelangganRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
+            'email' => 'required|email:rfc,dns|unique:users,email',
             'password' => 'required|min:8',
             'phone' => 'required|string',
             'alamat' => 'required|string',

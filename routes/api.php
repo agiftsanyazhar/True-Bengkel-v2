@@ -53,6 +53,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // --------------------------------------------------------------------------
 Route::prefix('about')->name('about.')->group(function () {
     Route::get('/', [AboutController::class, 'index'])->name('index');
+    Route::post('/update', [AboutController::class, 'update'])->name('update');
 });
 
 // --------------------------------------------------------------------------
@@ -80,6 +81,9 @@ Route::prefix('brand')->name('brand.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('gallery')->name('gallery.')->group(function () {
     Route::get('/', [GalleryController::class, 'index'])->name('index');
+    Route::post('/store', [GalleryController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [GalleryController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [GalleryController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------

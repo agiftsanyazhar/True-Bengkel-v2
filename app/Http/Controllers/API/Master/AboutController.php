@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\API\Master;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
+use App\Models\{
+    About,
+};
 use App\Http\Requests\{
-    StoreAboutRequest,
-    UpdateAboutRequest
+    AboutRequest,
+};
+use Illuminate\Support\Facades\{
+    DB,
+    Log,
 };
 
 class AboutController extends Controller
@@ -26,50 +31,12 @@ class AboutController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAboutRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(About $about)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(About $about)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAboutRequest $request, About $about)
+    public function update(AboutRequest $request)
     {
-        //
-    }
+        $response = $request->update($request);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(About $about)
-    {
-        //
+        return response()->json($response, 200);
     }
 }
