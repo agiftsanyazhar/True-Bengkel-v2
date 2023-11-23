@@ -15,7 +15,7 @@ class ServiceDetailSeeder extends Seeder
         $serviceDetail = [
             [
                 'order_id' => 2,
-                'name' => 'ganti_oli',
+                'name' => 'ganti oli',
                 'harga_jasa' => rand(1000, 999999),
             ],
         ];

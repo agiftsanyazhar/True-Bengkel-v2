@@ -49,30 +49,4 @@ class OrderController extends Controller
 
         return response()->json($response, 200);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        try {
-            $order = Order::findOrFail($id);
-
-            $order->delete();
-
-            $success = true;
-            $message = 'Success';
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::debug($e->getMessage());
-
-            $success = false;
-            $message = 'Failure. ' . $e->getMessage();
-        }
-
-        return response()->json([
-            'success' => $success,
-            'message' => $message,
-        ], 200);
-    }
 }

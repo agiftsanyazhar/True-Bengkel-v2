@@ -41,8 +41,8 @@ class OrderRequest extends FormRequest
     {
         return [
             'order_code' => 'string',
-            'pelanggan_id' => 'required|integer',
-            'is_service' => 'required|integer',
+            'pelanggan_id' => 'integer',
+            'is_service' => 'integer',
             'is_paid' => 'required|integer',
             'total_shopping' => 'integer',
             'order_id' => 'integer',
@@ -72,21 +72,12 @@ class OrderRequest extends FormRequest
             $order = Order::create($data);
 
             $orderId = $order->id;
+            $sparePartId = $request->spare_part_id;
+            $qty = $data['qty'];
+            $hargaJasa = $request->harga_jasa;
 
-            $sparePart = SparePart::find($request->spare_part_id);
-
-            $hargaSatuan = $sparePart->price;
-
-            $order = Order::find($orderId);
-
-            $totalShopping = ($hargaSatuan * $data['qty']) + $request->harga_jasa;
-            $order->total_shopping += $totalShopping;
-
-            $order->save();
-
-            $sparePart->stock = $sparePart->stock - $data['qty'];
-
-            $sparePart->save();
+            $hargaSatuan = $this->updateTotalShopping($orderId, $sparePartId, $qty, $hargaJasa);
+            $this->updateStock($sparePartId, $qty);
 
             OrderDetail::create([
                 'order_id' => $orderId,
@@ -121,9 +112,9 @@ class OrderRequest extends FormRequest
     public function update($request)
     {
         try {
-            $data = $this->validated();
-
             $order = Order::findOrFail($request->id);
+
+            $order->is_paid = 1;
 
             if ($request->hasFile('bukti_pembayaran')) {
                 $imageName = $request->validate([
@@ -131,14 +122,14 @@ class OrderRequest extends FormRequest
                 ]);
 
                 $imageName = $request->file('bukti_pembayaran');
-                $data['bukti_pembayaran'] = $imageName->store($this->uploadPath);
+                $order->bukti_pembayaran = $imageName->store($this->uploadPath);
 
                 if ($order->bukti_pembayaran) {
                     Storage::delete($order->bukti_pembayaran);
                 }
             }
 
-            $order->update($data);
+            $order->save();
 
             $success = true;
             $message = 'Success';
@@ -154,5 +145,30 @@ class OrderRequest extends FormRequest
             'message' => $message,
             'data' => $order,
         ];
+    }
+
+    private function updateTotalShopping($orderId, $sparePartId, $qty, $hargaJasa): int
+    {
+        $sparePart = SparePart::find($sparePartId);
+
+        $hargaSatuan = $sparePart->price;
+
+        $order = Order::find($orderId);
+
+        $totalShopping = ($hargaSatuan * $qty) + $hargaJasa;
+        $order->total_shopping += $totalShopping;
+
+        $order->save();
+
+        return $hargaSatuan;
+    }
+
+    private function updateStock($sparePartId, $qty): void
+    {
+        $sparePart = SparePart::find($sparePartId);
+
+        $sparePart->stock = $sparePart->stock - $qty;
+
+        $sparePart->save();
     }
 }

@@ -119,7 +119,6 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::post('/store', [OrderController::class, 'store'])->name('store');
     Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [OrderController::class, 'destroy'])->name('destroy');
     Route::prefix('detail')->name('detail.')->group(function () {
         Route::get('/{order_id}', [OrderDetailController::class, 'index'])->name('index');
     });
