@@ -5,8 +5,7 @@ namespace App\Http\Controllers\API\Master\MasterData;
 use App\Http\Controllers\Controller;
 use App\Models\Jabatan;
 use App\Http\Requests\{
-    StoreJabatanRequest,
-    UpdateJabatanRequest,
+    JabatanRequest,
 };
 
 class JabatanController extends Controller
@@ -28,7 +27,7 @@ class JabatanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJabatanRequest $request)
+    public function store(JabatanRequest $request)
     {
         $response = $request->store();
 
@@ -36,27 +35,13 @@ class JabatanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Jabatan $jabatan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Jabatan $jabatan)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJabatanRequest $request, Jabatan $jabatan)
+    public function update(JabatanRequest $request)
     {
-        //
+        $response = $request->update($request);
+
+        return response()->json($response, 200);
     }
 
     /**
