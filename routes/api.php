@@ -95,6 +95,9 @@ Route::prefix('jabatan')->name('jabatan.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('kendaraan')->name('kendaraan.')->group(function () {
     Route::get('/', [KendaraanController::class, 'index'])->name('index');
+    Route::post('/store', [KendaraanController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [KendaraanController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [KendaraanController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -112,6 +115,9 @@ Route::prefix('motor')->name('motor.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('index');
+    Route::post('/store', [OrderController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [OrderController::class, 'destroy'])->name('destroy');
     Route::prefix('detail')->name('detail.')->group(function () {
         Route::get('/{order_id}', [OrderController::class, 'show'])->name('show');
     });
@@ -147,8 +153,11 @@ Route::prefix('role')->name('role.')->group(function () {
 // --------------------------------------------------------------------------
 // Spare Part
 // --------------------------------------------------------------------------
-Route::prefix('spare-prat')->name('spare-prat.')->group(function () {
+Route::prefix('spare-part')->name('spare-prat.')->group(function () {
     Route::get('/', [SparePartController::class, 'index'])->name('index');
+    Route::post('/store', [SparePartController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [SparePartController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [SparePartController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------

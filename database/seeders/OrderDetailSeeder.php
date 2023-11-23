@@ -19,74 +19,74 @@ class OrderDetailSeeder extends Seeder
         $orderDetail = [
             [
                 'order_id' => 1,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 1,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 1,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 2,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 2,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 2,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 2,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 3,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 3,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 3,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
             [
                 'order_id' => 3,
-                'spare_part_id' => rand(1, 10),
+                'spare_part_code' => rand(1, 10),
                 'qty' => rand(1, 5),
                 'harga_satuan' => 0,
             ],
         ];
 
         foreach ($orderDetail as $item) {
-            $sparePart = SparePart::find($item['spare_part_id']);
+            $sparePart = SparePart::find($item['spare_part_code']);
 
             $item['harga_satuan'] = $sparePart->price;
 

@@ -5,8 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\SparePart;
 use App\Http\Requests\{
-    StoreSparePartRequest,
-    UpdateSparePartRequest,
+    SparePartRequest,
+};
+use Illuminate\Support\Facades\{
+    DB,
+    Log,
 };
 
 class SparePartController extends Controller
@@ -26,50 +29,48 @@ class SparePartController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSparePartRequest $request)
+    public function store(SparePartRequest $request)
     {
-        //
-    }
+        $response = $request->store($request);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SparePart $sparePart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SparePart $sparePart)
-    {
-        //
+        return response()->json($response, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSparePartRequest $request, SparePart $sparePart)
+    public function update(SparePartRequest $request)
     {
-        //
+        $response = $request->update($request);
+
+        return response()->json($response, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SparePart $sparePart)
+    public function destroy($id)
     {
-        //
+        try {
+            $sparePart = SparePart::findOrFail($id);
+
+            $sparePart->delete();
+
+            $success = true;
+            $message = 'Success';
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::debug($e->getMessage());
+
+            $success = false;
+            $message = 'Failure. ' . $e->getMessage();
+        }
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ], 200);
     }
 }

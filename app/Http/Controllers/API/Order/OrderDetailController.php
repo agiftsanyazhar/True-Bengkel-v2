@@ -19,6 +19,20 @@ class OrderDetailController extends Controller
         //
     }
 
+    public function show($order_id)
+    {
+        $orderDetail = OrderDetail::where('order_id', $order_id)->get();
+        $serviceDetail = ServiceDetail::where('order_id', $order_id)->get();
+
+        $data = compact('orderDetail', 'serviceDetail');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $data,
+        ], 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

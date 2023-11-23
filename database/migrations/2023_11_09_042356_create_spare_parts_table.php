@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('spare_parts', function (Blueprint $table) {
             $table->id();
-            $table->string('spare_part_id')->unique();
+            $table->string('spare_part_code')->unique();
             $table->foreignId('brand_id')
                 ->constrained('brands')
                 ->onUpdate('cascade')

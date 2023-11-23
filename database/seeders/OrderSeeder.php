@@ -17,21 +17,18 @@ class OrderSeeder extends Seeder
             [
                 'pelanggan_id' => rand(1, 3),
                 'is_service' => rand(0, 1),
-                'payment_at' => Carbon::now(),
                 'total_shopping' => 0,
                 'bukti_pembayaran' => 'uploads/bukti-pembayaran/bukti-pembayaran-1.jpg',
             ],
             [
                 'pelanggan_id' => rand(1, 3),
                 'is_service' => rand(0, 1),
-                'payment_at' => Carbon::now(),
                 'total_shopping' => 0,
                 'bukti_pembayaran' => 'uploads/bukti-pembayaran/bukti-pembayaran-2.jpg',
             ],
             [
                 'pelanggan_id' => rand(1, 3),
                 'is_service' => rand(0, 1),
-                'payment_at' => Carbon::now(),
                 'total_shopping' => 0,
                 'bukti_pembayaran' => 'uploads/bukti-pembayaran/bukti-pembayaran-3.jpg',
             ],
