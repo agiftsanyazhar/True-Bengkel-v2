@@ -5,8 +5,11 @@ namespace App\Http\Controllers\API\Master\MasterData;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Http\Requests\{
-    StoreBrandRequest,
-    UpdateBrandRequest
+    BrandRequest,
+};
+use Illuminate\Support\Facades\{
+    DB,
+    Log,
 };
 
 class BrandController extends Controller
@@ -26,50 +29,48 @@ class BrandController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBrandRequest $request)
+    public function store(BrandRequest $request)
     {
-        //
-    }
+        $response = $request->store();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Brand $brand)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Brand $brand)
-    {
-        //
+        return response()->json($response, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBrandRequest $request, Brand $brand)
+    public function update(BrandRequest $request)
     {
-        //
+        $response = $request->update($request);
+
+        return response()->json($response, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy($id)
     {
-        //
+        try {
+            $tipeMotor = Brand::findOrFail($id);
+
+            $tipeMotor->delete();
+
+            $success = true;
+            $message = 'Success';
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::debug($e->getMessage());
+
+            $success = false;
+            $message = 'Failure. ' . $e->getMessage();
+        }
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ], 200);
     }
 }

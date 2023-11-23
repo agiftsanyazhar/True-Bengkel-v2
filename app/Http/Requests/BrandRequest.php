@@ -2,12 +2,15 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Jabatan;
+use App\Models\{
+    Brand,
+};
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\{
+    Log,
+};
 
-class JabatanRequest extends FormRequest
+class BrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,20 +28,16 @@ class JabatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:jabatans,name',
-            'gaji_pokok' => 'required|integer',
-            'tunjangan' => 'integer',
+            'name' => 'required|string|unique:brands',
         ];
     }
 
-    public function store($request)
+    public function store()
     {
         try {
             $data = $this->validated();
 
-            $data['name'] = Str::title($request->name);
-
-            $jabatan = Jabatan::create($data);
+            $brand = Brand::create($data);
 
             $success = true;
             $message = 'Success';
@@ -52,7 +51,7 @@ class JabatanRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $jabatan,
+            'data' => $brand,
         ];
     }
 
@@ -61,11 +60,9 @@ class JabatanRequest extends FormRequest
         try {
             $data = $this->validated();
 
-            $jabatan = Jabatan::findOrFail($request->id);
+            $brand = Brand::findOrFail($request->id);
 
-            $data['name'] = Str::title($request->name);
-
-            $jabatan->update($data);
+            $brand->update($data);
 
             $success = true;
             $message = 'Success';
@@ -79,7 +76,7 @@ class JabatanRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $jabatan,
+            'data' => $brand,
         ];
     }
 }

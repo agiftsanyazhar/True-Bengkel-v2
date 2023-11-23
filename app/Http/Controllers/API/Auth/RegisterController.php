@@ -11,6 +11,8 @@ use App\Models\{
     User,
 };
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -28,23 +30,23 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => Str::title($request->name),
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
         ]);
 
         $userId = $user->id;
 
         if ($request->role_id == 1) {
-            $admin = Admin::create([
-                'name' => $request->name,
+            Admin::create([
+                'name' => Str::title($request->name),
                 'email' => $request->email,
                 'user_id' => $userId,
             ]);
         } else if ($request->role_id == 2) {
-            $pegawai = Pegawai::create([
-                'name' => $request->name,
+            Pegawai::create([
+                'name' => Str::title($request->name),
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'alamat' => $request->alamat,
@@ -53,8 +55,8 @@ class RegisterController extends Controller
                 'jabatan_id' => $request->jabatan_id,
             ]);
         } else if ($request->role_id == 3) {
-            $pelanggan = Pelanggan::create([
-                'name' => $request->name,
+            Pelanggan::create([
+                'name' => Str::title($request->name),
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'alamat' => $request->alamat,

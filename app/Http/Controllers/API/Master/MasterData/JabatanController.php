@@ -7,6 +7,10 @@ use App\Models\Jabatan;
 use App\Http\Requests\{
     JabatanRequest,
 };
+use Illuminate\Support\Facades\{
+    DB,
+    Log,
+};
 
 class JabatanController extends Controller
 {
@@ -29,7 +33,7 @@ class JabatanController extends Controller
      */
     public function store(JabatanRequest $request)
     {
-        $response = $request->store();
+        $response = $request->store($request);
 
         return response()->json($response, 200);
     }
@@ -47,8 +51,26 @@ class JabatanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jabatan $jabatan)
+    public function destroy($id)
     {
-        //
+        try {
+            $jabatan = Jabatan::findOrFail($id);
+
+            $jabatan->delete();
+
+            $success = true;
+            $message = 'Success';
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::debug($e->getMessage());
+
+            $success = false;
+            $message = 'Failure. ' . $e->getMessage();
+        }
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ], 200);
     }
 }

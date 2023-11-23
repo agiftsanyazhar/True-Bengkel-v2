@@ -2,12 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Jabatan;
+use App\Models\{
+    Motor,
+};
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\{
+    Log,
+};
 
-class JabatanRequest extends FormRequest
+
+class MotorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,20 +29,18 @@ class JabatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:jabatans,name',
-            'gaji_pokok' => 'required|integer',
-            'tunjangan' => 'integer',
+            'name' => 'required|string|unique:motors',
+            'brand_id' => 'required|integer',
+            'tipe_motor_id' => 'required|integer',
         ];
     }
 
-    public function store($request)
+    public function store()
     {
         try {
             $data = $this->validated();
 
-            $data['name'] = Str::title($request->name);
-
-            $jabatan = Jabatan::create($data);
+            $motor = Motor::create($data);
 
             $success = true;
             $message = 'Success';
@@ -52,7 +54,7 @@ class JabatanRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $jabatan,
+            'data' => $motor,
         ];
     }
 
@@ -61,11 +63,9 @@ class JabatanRequest extends FormRequest
         try {
             $data = $this->validated();
 
-            $jabatan = Jabatan::findOrFail($request->id);
+            $motor = Motor::findOrFail($request->id);
 
-            $data['name'] = Str::title($request->name);
-
-            $jabatan->update($data);
+            $motor->update($data);
 
             $success = true;
             $message = 'Success';
@@ -79,7 +79,7 @@ class JabatanRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $jabatan,
+            'data' => $motor,
         ];
     }
 }

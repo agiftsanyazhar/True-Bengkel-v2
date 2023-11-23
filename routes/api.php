@@ -58,6 +58,9 @@ Route::prefix('about')->name('about.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::post('/store', [AdminController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [AdminController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [AdminController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -65,6 +68,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('brand')->name('brand.')->group(function () {
     Route::get('/', [BrandController::class, 'index'])->name('index');
+    Route::post('/store', [BrandController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [BrandController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -96,6 +102,9 @@ Route::prefix('kendaraan')->name('kendaraan.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('motor')->name('motor.')->group(function () {
     Route::get('/', [MotorController::class, 'index'])->name('index');
+    Route::post('/store', [MotorController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [MotorController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [MotorController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -113,6 +122,9 @@ Route::prefix('order')->name('order.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('pegawai')->name('pegawai.')->group(function () {
     Route::get('/', [PegawaiController::class, 'index'])->name('index');
+    Route::post('/store', [PegawaiController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [PegawaiController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [PegawaiController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -120,6 +132,9 @@ Route::prefix('pegawai')->name('pegawai.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('pelanggan')->name('pelanggan.')->group(function () {
     Route::get('/', [PelangganController::class, 'index'])->name('index');
+    Route::post('/store', [PelangganController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [PelangganController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [PelangganController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -141,6 +156,9 @@ Route::prefix('spare-prat')->name('spare-prat.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('tipe-motor')->name('tipe-motor.')->group(function () {
     Route::get('/', [TipeMotorController::class, 'index'])->name('index');
+    Route::post('/store', [TipeMotorController::class, 'store'])->name('store');
+    Route::post('/update/{id}', [TipeMotorController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [TipeMotorController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------

@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pegawai;
+use App\Models\{
+    Pegawai,
+    User,
+};
 use App\Http\Requests\{
-    StorePegawaiRequest,
-    UpdatePegawaiRequest,
+    PegawaiRequest,
+};
+use Illuminate\Support\Facades\{
+    DB,
+    Log,
 };
 
 class PegawaiController extends Controller
@@ -26,50 +32,48 @@ class PegawaiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePegawaiRequest $request)
+    public function store(PegawaiRequest $request)
     {
-        //
-    }
+        $response = $request->store($request);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pegawai $pegawai)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pegawai $pegawai)
-    {
-        //
+        return response()->json($response, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePegawaiRequest $request, Pegawai $pegawai)
+    public function update(PegawaiRequest $request)
     {
-        //
+        $response = $request->update($request);
+
+        return response()->json($response, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pegawai $pegawai)
+    public function destroy($id)
     {
-        //
+        try {
+            $pegawai = Pegawai::findOrFail($id);
+
+            User::where('id', $pegawai->user->id)->delete();
+
+            $success = true;
+            $message = 'Success';
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::debug($e->getMessage());
+
+            $success = false;
+            $message = 'Failure. ' . $e->getMessage();
+        }
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ], 200);
     }
 }

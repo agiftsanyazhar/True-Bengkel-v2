@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pelanggan;
+use App\Models\{
+    Pelanggan,
+    User,
+};
 use App\Http\Requests\{
-    StorePelangganRequest,
-    UpdatePelangganRequest,
+    PelangganRequest,
+};
+use Illuminate\Support\Facades\{
+    DB,
+    Log,
 };
 
 class PelangganController extends Controller
@@ -26,50 +32,48 @@ class PelangganController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePelangganRequest $request)
+    public function store(PelangganRequest $request)
     {
-        //
-    }
+        $response = $request->store($request);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pelanggan $pelanggan)
-    {
-        //
+        return response()->json($response, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePelangganRequest $request, Pelanggan $pelanggan)
+    public function update(PelangganRequest $request)
     {
-        //
+        $response = $request->update($request);
+
+        return response()->json($response, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelanggan $pelanggan)
+    public function destroy($id)
     {
-        //
+        try {
+            $pelanggan = Pelanggan::findOrFail($id);
+
+            User::where('id', $pelanggan->user->id)->delete();
+
+            $success = true;
+            $message = 'Success';
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::debug($e->getMessage());
+
+            $success = false;
+            $message = 'Failure. ' . $e->getMessage();
+        }
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ], 200);
     }
 }

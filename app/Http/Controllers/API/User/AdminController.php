@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\API\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Models\{
+    Admin,
+    User,
+};
 use App\Http\Requests\{
-    StoreAdminRequest,
-    UpdateAdminRequest,
+    AdminRequest,
+};
+use Illuminate\Support\Facades\{
+    DB,
+    Log,
 };
 
 class AdminController extends Controller
@@ -26,50 +32,45 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAdminRequest $request)
+    public function store(AdminRequest $request)
     {
-        //
-    }
+        $response = $request->store($request);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Admin $admin)
-    {
-        //
+        return response()->json($response, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdminRequest $request, Admin $admin)
+    public function update(AdminRequest $request)
     {
-        //
+        $response = $request->update($request);
+
+        return response()->json($response, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
+    public function destroy($id)
     {
-        //
+        try {
+            $admin = Admin::findOrFail($id);
+
+            User::where('id', $admin->user->id)->delete();
+
+            $success = true;
+            $message = 'Success';
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::debug($e->getMessage());
+
+            $success = false;
+            $message = 'Failure. ' . $e->getMessage();
+        }
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ], 200);
     }
 }

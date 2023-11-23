@@ -2,12 +2,18 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Jabatan;
+use App\Models\{
+    Admin,
+    User,
+};
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\{
+    Hash,
+    Log,
+};
 use Illuminate\Support\Str;
 
-class JabatanRequest extends FormRequest
+class AdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,20 +31,31 @@ class JabatanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:jabatans,name',
-            'gaji_pokok' => 'required|integer',
-            'tunjangan' => 'integer',
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users,email',
+            'password' => 'required|min:8',
         ];
     }
 
     public function store($request)
     {
         try {
-            $data = $this->validated();
+            $this->validated();
 
-            $data['name'] = Str::title($request->name);
+            $user = User::create([
+                'name' => Str::title($request->name),
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_id' => 1,
+            ]);
 
-            $jabatan = Jabatan::create($data);
+            $userId = $user->id;
+
+            $admin = Admin::create([
+                'name' => Str::title($request->name),
+                'email' => $request->email,
+                'user_id' => $userId,
+            ]);
 
             $success = true;
             $message = 'Success';
@@ -52,7 +69,7 @@ class JabatanRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $jabatan,
+            'data' => $admin,
         ];
     }
 
@@ -61,11 +78,16 @@ class JabatanRequest extends FormRequest
         try {
             $data = $this->validated();
 
-            $jabatan = Jabatan::findOrFail($request->id);
+            $admin = Admin::findOrFail($request->id);
 
-            $data['name'] = Str::title($request->name);
+            $admin->update($data);
 
-            $jabatan->update($data);
+            User::where('id', $admin->user->id)->update([
+                'name' => Str::title($request->name),
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_id' => 1,
+            ]);
 
             $success = true;
             $message = 'Success';
@@ -79,7 +101,7 @@ class JabatanRequest extends FormRequest
         return [
             'success' => $success,
             'message' => $message,
-            'data' => $jabatan,
+            'data' => $admin,
         ];
     }
 }
