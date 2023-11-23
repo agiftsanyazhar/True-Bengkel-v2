@@ -36,6 +36,7 @@ class PelangganRequest extends FormRequest
             'password' => 'required|min:8',
             'phone' => 'required|string',
             'alamat' => 'required|string',
+            'role_id' => 'integer',
         ];
     }
 

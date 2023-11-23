@@ -43,7 +43,7 @@ class SparePartRequest extends FormRequest
             'tipe_motor_id' => 'required|integer',
             'name' => 'required|string',
             'headline' => 'required|string',
-            'description' => 'string',
+            'description' => 'required|string',
             'stock' => 'required|integer',
             'price' => 'required|integer',
         ];

@@ -38,6 +38,7 @@ class PegawaiRequest extends FormRequest
             'alamat' => 'required|string',
             'description' => 'string',
             'jabatan_id' => 'integer',
+            'role_id' => 'integer',
         ];
     }
 

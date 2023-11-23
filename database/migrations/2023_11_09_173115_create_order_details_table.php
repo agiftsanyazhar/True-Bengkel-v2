@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained('orders')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('spare_part_code')
+            $table->foreignId('spare_part_id')
                 ->constrained('spare_parts')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

@@ -34,6 +34,7 @@ class AdminRequest extends FormRequest
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|min:8',
+            'role_id' => 'integer',
         ];
     }
 

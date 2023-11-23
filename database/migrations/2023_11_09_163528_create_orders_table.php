@@ -22,8 +22,8 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('is_service');
             $table->integer('is_paid')->default(0);
-            $table->integer('total_shopping');
-            $table->string('bukti_pembayaran');
+            $table->integer('total_shopping')->default(0);
+            $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
         });
     }

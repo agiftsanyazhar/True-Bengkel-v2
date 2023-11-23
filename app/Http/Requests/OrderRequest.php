@@ -4,7 +4,11 @@ namespace App\Http\Requests;
 
 use App\Models\{
     Order,
+    OrderDetail,
+    ServiceDetail,
+    SparePart,
 };
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\{
     Log,
@@ -36,10 +40,16 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'order_code' => 'string',
             'pelanggan_id' => 'required|integer',
             'is_service' => 'required|integer',
             'is_paid' => 'required|integer',
-            'total_shopping' => 'required|integer',
+            'total_shopping' => 'integer',
+            'order_id' => 'integer',
+            'spare_part_id' => 'integer',
+            'qty' => 'integer',
+            'name' => 'string',
+            'harga_satuan' => 'integer',
         ];
     }
 
@@ -47,6 +57,8 @@ class OrderRequest extends FormRequest
     {
         try {
             $data = $this->validated();
+
+            $data['order_code'] = 'ODR-' . Carbon::now()->format('dmYHis');
 
             if ($request->hasFile('bukti_pembayaran')) {
                 $imageName = $request->validate([
@@ -58,6 +70,37 @@ class OrderRequest extends FormRequest
             }
 
             $order = Order::create($data);
+
+            $orderId = $order->id;
+
+            $sparePart = SparePart::find($request->spare_part_id);
+
+            $hargaSatuan = $sparePart->price;
+
+            $order = Order::find($orderId);
+
+            $totalShopping = ($hargaSatuan * $data['qty']) + $request->harga_jasa;
+            $order->total_shopping += $totalShopping;
+
+            $order->save();
+
+            $sparePart->stock = $sparePart->stock - $data['qty'];
+
+            $sparePart->save();
+
+            OrderDetail::create([
+                'order_id' => $orderId,
+                'spare_part_id' => $request->spare_part_id,
+                'qty' => $request->qty,
+                'harga_satuan' => $hargaSatuan,
+            ]);
+
+            ServiceDetail::create([
+                'order_id' => $orderId,
+                'name' => $request->name,
+                'qty' => $request->qty,
+                'harga_jasa' => $request->harga_jasa,
+            ]);
 
             $success = true;
             $message = 'Success';
@@ -89,7 +132,10 @@ class OrderRequest extends FormRequest
 
                 $imageName = $request->file('bukti_pembayaran');
                 $data['bukti_pembayaran'] = $imageName->store($this->uploadPath);
-                Storage::delete($order->bukti_pembayaran);
+
+                if ($order->bukti_pembayaran) {
+                    Storage::delete($order->bukti_pembayaran);
+                }
             }
 
             $order->update($data);

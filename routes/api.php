@@ -21,6 +21,7 @@ use App\Http\Controllers\API\Master\MasterData\{
 };
 use App\Http\Controllers\API\Order\{
     OrderController,
+    OrderDetailController,
 };
 use App\Http\Controllers\API\User\{
     AdminController,
@@ -28,6 +29,7 @@ use App\Http\Controllers\API\User\{
     PelangganController,
     UserController,
 };
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -119,7 +121,7 @@ Route::prefix('order')->name('order.')->group(function () {
     Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
     Route::get('/destroy/{id}', [OrderController::class, 'destroy'])->name('destroy');
     Route::prefix('detail')->name('detail.')->group(function () {
-        Route::get('/{order_id}', [OrderController::class, 'show'])->name('show');
+        Route::get('/{order_id}', [OrderDetailController::class, 'index'])->name('index');
     });
 });
 
