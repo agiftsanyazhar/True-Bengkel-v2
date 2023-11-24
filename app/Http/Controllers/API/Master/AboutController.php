@@ -9,10 +9,6 @@ use App\Models\{
 use App\Http\Requests\{
     AboutRequest,
 };
-use Illuminate\Support\Facades\{
-    DB,
-    Log,
-};
 
 class AboutController extends Controller
 {

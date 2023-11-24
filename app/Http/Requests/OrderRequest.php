@@ -50,6 +50,7 @@ class OrderRequest extends FormRequest
             'qty' => 'integer',
             'name' => 'string',
             'harga_satuan' => 'integer',
+            'bukti_pembayaran' => 'mimes:jpeg,jpg,png|max:2048',
         ];
     }
 
@@ -61,10 +62,6 @@ class OrderRequest extends FormRequest
             $data['order_code'] = 'ODR-' . Carbon::now()->format('dmYHis');
 
             if ($request->hasFile('bukti_pembayaran')) {
-                $imageName = $request->validate([
-                    'bukti_pembayaran' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $imageName = $request->file('bukti_pembayaran');
                 $data['bukti_pembayaran'] = $imageName->store($this->uploadPath);
             }
@@ -117,10 +114,6 @@ class OrderRequest extends FormRequest
             $order->is_paid = 1;
 
             if ($request->hasFile('bukti_pembayaran')) {
-                $imageName = $request->validate([
-                    'bukti_pembayaran' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $imageName = $request->file('bukti_pembayaran');
                 $order->bukti_pembayaran = $imageName->store($this->uploadPath);
 

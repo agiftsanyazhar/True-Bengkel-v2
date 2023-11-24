@@ -9,10 +9,6 @@ use App\Models\{
 use App\Http\Requests\{
     OrderRequest,
 };
-use Illuminate\Support\Facades\{
-    DB,
-    Log,
-};
 
 class OrderController extends Controller
 {

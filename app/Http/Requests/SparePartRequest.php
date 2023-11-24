@@ -46,6 +46,7 @@ class SparePartRequest extends FormRequest
             'description' => 'required|string',
             'stock' => 'required|integer',
             'price' => 'required|integer',
+            'image' => 'mimes:jpeg,jpg,png|max:2048',
         ];
     }
 
@@ -58,10 +59,6 @@ class SparePartRequest extends FormRequest
             $data['slug'] = Str::slug($brand->name) . '-spare-part';
 
             if ($request->hasFile('image')) {
-                $imageName = $request->validate([
-                    'image' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $imageName = $request->file('image');
                 $data['image'] = $imageName->store($this->uploadPath);
             }
@@ -92,10 +89,6 @@ class SparePartRequest extends FormRequest
             $sparePart = SparePart::findOrFail($request->id);
 
             if ($request->hasFile('image')) {
-                $imageName = $request->validate([
-                    'image' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $imageName = $request->file('image');
                 $data['image'] = $imageName->store($this->uploadPath);
                 Storage::delete($sparePart->image);

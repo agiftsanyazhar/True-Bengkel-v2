@@ -188,4 +188,5 @@ Route::prefix('user')->name('user.')->group(function () {
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/login', LoginController::class)->name('login');
     Route::post('/register', RegisterController::class)->name('register');
+    Route::post('/logout', LoginController::class)->name('logout');
 });

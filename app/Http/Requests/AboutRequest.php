@@ -46,6 +46,8 @@ class AboutRequest extends FormRequest
             'phone' => 'required|string',
             'opening_hours' => 'required|string',
             'closing_hours' => 'required|string',
+            'hero_image' => 'mimes:jpeg,jpg,png|max:2048',
+            'about_image' => 'mimes:jpeg,jpg,png|max:2048',
         ];
     }
 
@@ -57,10 +59,6 @@ class AboutRequest extends FormRequest
             $about = About::findOrFail(1);
 
             if ($request->hasFile('hero_image')) {
-                $heroImage = $request->validate([
-                    'hero_image' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $heroImage = $request->file('hero_image');
                 $data['hero_image'] = $heroImage->store($this->uploadPath);
                 if ($about->hero_image) {
@@ -69,10 +67,6 @@ class AboutRequest extends FormRequest
             }
 
             if ($request->hasFile('about_image')) {
-                $aboutImage = $request->validate([
-                    'about_image' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $aboutImage = $request->file('about_image');
                 $data['about_image'] = $aboutImage->store($this->uploadPath);
                 if ($about->about_image) {

@@ -37,6 +37,7 @@ class GalleryRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'image' => 'mimes:jpeg,jpg,png|max:2048',
         ];
     }
 
@@ -46,10 +47,6 @@ class GalleryRequest extends FormRequest
             $data = $this->validated();
 
             if ($request->hasFile('image')) {
-                $imageName = $request->validate([
-                    'image' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $imageName = $request->file('image');
                 $data['image'] = $imageName->store($this->uploadPath);
             }
@@ -80,10 +77,6 @@ class GalleryRequest extends FormRequest
             $gallery = Gallery::findOrFail($request->id);
 
             if ($request->hasFile('image')) {
-                $imageName = $request->validate([
-                    'image' => 'mimes:jpeg,jpg,png|max:2048'
-                ]);
-
                 $imageName = $request->file('image');
                 $data['image'] = $imageName->store($this->uploadPath);
                 Storage::delete($gallery->image);
