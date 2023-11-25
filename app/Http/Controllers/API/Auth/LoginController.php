@@ -31,7 +31,7 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'message' => 'Your credential does not match.',
+            'message' => 'These credentials do not match our records.',
         ], 401);
     }
 }
