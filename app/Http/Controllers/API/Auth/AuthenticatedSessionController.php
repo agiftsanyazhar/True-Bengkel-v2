@@ -5,8 +5,9 @@ namespace App\Http\Controllers\API\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class AuthenticatedSessionController extends Controller
 {
     public function __invoke(Request $request)
     {
@@ -33,5 +34,24 @@ class LoginController extends Controller
         return response()->json([
             'message' => 'These credentials do not match our records.',
         ], 401);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        $success = true;
+        $message = 'Success';
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ], 200);
     }
 }

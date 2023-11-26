@@ -7,7 +7,7 @@ use App\Http\Controllers\API\{
     SparePartController,
 };
 use App\Http\Controllers\API\Auth\{
-    LoginController,
+    AuthenticatedSessionController,
     RegisterController,
 };
 use App\Http\Controllers\API\Master\{
@@ -29,7 +29,6 @@ use App\Http\Controllers\API\User\{
     PelangganController,
     UserController,
 };
-use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,7 +52,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // --------------------------------------------------------------------------
 Route::prefix('about')->name('about.')->group(function () {
     Route::get('/', [AboutController::class, 'index'])->name('index');
-    Route::post('/update', [AboutController::class, 'update'])->name('update');
+    Route::post('/update', [AboutController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
 });
 
 // --------------------------------------------------------------------------
@@ -61,9 +62,15 @@ Route::prefix('about')->name('about.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
-    Route::post('/store', [AdminController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [AdminController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [AdminController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [AdminController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [AdminController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [AdminController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -71,9 +78,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('brand')->name('brand.')->group(function () {
     Route::get('/', [BrandController::class, 'index'])->name('index');
-    Route::post('/store', [BrandController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [BrandController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [BrandController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [BrandController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [BrandController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -81,9 +94,15 @@ Route::prefix('brand')->name('brand.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('gallery')->name('gallery.')->group(function () {
     Route::get('/', [GalleryController::class, 'index'])->name('index');
-    Route::post('/store', [GalleryController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [GalleryController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [GalleryController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [GalleryController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [GalleryController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [GalleryController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -91,9 +110,15 @@ Route::prefix('gallery')->name('gallery.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('jabatan')->name('jabatan.')->group(function () {
     Route::get('/', [JabatanController::class, 'index'])->name('index');
-    Route::post('/store', [JabatanController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [JabatanController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [JabatanController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [JabatanController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [JabatanController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [JabatanController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -101,9 +126,15 @@ Route::prefix('jabatan')->name('jabatan.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('kendaraan')->name('kendaraan.')->group(function () {
     Route::get('/', [KendaraanController::class, 'index'])->name('index');
-    Route::post('/store', [KendaraanController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [KendaraanController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [KendaraanController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [KendaraanController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [KendaraanController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [KendaraanController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -111,9 +142,15 @@ Route::prefix('kendaraan')->name('kendaraan.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('motor')->name('motor.')->group(function () {
     Route::get('/', [MotorController::class, 'index'])->name('index');
-    Route::post('/store', [MotorController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [MotorController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [MotorController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [MotorController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [MotorController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [MotorController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -121,8 +158,12 @@ Route::prefix('motor')->name('motor.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('index');
-    Route::post('/store', [OrderController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
+    Route::post('/store', [OrderController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [OrderController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
     Route::prefix('detail')->name('detail.')->group(function () {
         Route::get('/{order_id}', [OrderDetailController::class, 'index'])->name('index');
     });
@@ -133,9 +174,15 @@ Route::prefix('order')->name('order.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('pegawai')->name('pegawai.')->group(function () {
     Route::get('/', [PegawaiController::class, 'index'])->name('index');
-    Route::post('/store', [PegawaiController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [PegawaiController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [PegawaiController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [PegawaiController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [PegawaiController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [PegawaiController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -143,9 +190,15 @@ Route::prefix('pegawai')->name('pegawai.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('pelanggan')->name('pelanggan.')->group(function () {
     Route::get('/', [PelangganController::class, 'index'])->name('index');
-    Route::post('/store', [PelangganController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [PelangganController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [PelangganController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [PelangganController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [PelangganController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [PelangganController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -160,9 +213,15 @@ Route::prefix('role')->name('role.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('spare-part')->name('spare-part.')->group(function () {
     Route::get('/', [SparePartController::class, 'index'])->name('index');
-    Route::post('/store', [SparePartController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [SparePartController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [SparePartController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [SparePartController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [SparePartController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [SparePartController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
     Route::prefix('detail')->name('detail.')->group(function () {
         Route::get('/{id}', [SparePartController::class, 'show'])->name('detail');
     });
@@ -173,9 +232,15 @@ Route::prefix('spare-part')->name('spare-part.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('tipe-motor')->name('tipe-motor.')->group(function () {
     Route::get('/', [TipeMotorController::class, 'index'])->name('index');
-    Route::post('/store', [TipeMotorController::class, 'store'])->name('store');
-    Route::post('/update/{id}', [TipeMotorController::class, 'update'])->name('update');
-    Route::get('/destroy/{id}', [TipeMotorController::class, 'destroy'])->name('destroy');
+    Route::post('/store', [TipeMotorController::class, 'store'])
+        // ->middleware('auth:sanctum')
+        ->name('store');
+    Route::post('/update/{id}', [TipeMotorController::class, 'update'])
+        // ->middleware('auth:sanctum')
+        ->name('update');
+    Route::get('/destroy/{id}', [TipeMotorController::class, 'destroy'])
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });
 
 // --------------------------------------------------------------------------
@@ -189,7 +254,9 @@ Route::prefix('user')->name('user.')->group(function () {
 // Auth
 // --------------------------------------------------------------------------
 Route::prefix('auth')->name('auth.')->group(function () {
-    Route::post('/login', LoginController::class)->name('login');
+    Route::post('/login', AuthenticatedSessionController::class)->name('login');
     Route::post('/register', RegisterController::class)->name('register');
-    Route::post('/logout', LoginController::class)->name('logout');
+    Route::post('/logout', AuthenticatedSessionController::class)
+        // ->middleware('auth:sanctum')
+        ->name('destroy');
 });

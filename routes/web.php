@@ -12,17 +12,3 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/login', function () {
-    return redirect('login');
-});
-
-Route::get('/dashboard', function () {
-    // return redirect()->route('admin.bio.about-me.index');
-})->middleware(['auth'])->name('dashboard');
-
-// require __DIR__ . '/auth.php';
