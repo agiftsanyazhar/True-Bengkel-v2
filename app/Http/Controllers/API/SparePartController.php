@@ -48,6 +48,17 @@ class SparePartController extends Controller
         return response()->json($response, 200);
     }
 
+    public function show($id)
+    {
+        $sparePart = SparePart::where('id', $id)->with('brand', 'tipeMotor')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $sparePart,
+        ], 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      */

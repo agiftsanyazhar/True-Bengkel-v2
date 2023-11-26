@@ -158,11 +158,14 @@ Route::prefix('role')->name('role.')->group(function () {
 // --------------------------------------------------------------------------
 // Spare Part
 // --------------------------------------------------------------------------
-Route::prefix('spare-part')->name('spare-prat.')->group(function () {
+Route::prefix('spare-part')->name('spare-part.')->group(function () {
     Route::get('/', [SparePartController::class, 'index'])->name('index');
     Route::post('/store', [SparePartController::class, 'store'])->name('store');
     Route::post('/update/{id}', [SparePartController::class, 'update'])->name('update');
     Route::get('/destroy/{id}', [SparePartController::class, 'destroy'])->name('destroy');
+    Route::prefix('detail')->name('detail.')->group(function () {
+        Route::get('/{id}', [SparePartController::class, 'show'])->name('detail');
+    });
 });
 
 // --------------------------------------------------------------------------

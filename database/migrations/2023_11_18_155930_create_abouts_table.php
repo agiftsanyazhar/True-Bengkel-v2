@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('headline');
-            $table->longText('about');
+            $table->longText('description');
             $table->longText('location');
             $table->longText('map');
             $table->string('email');
