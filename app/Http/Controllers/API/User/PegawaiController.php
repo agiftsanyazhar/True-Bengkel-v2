@@ -22,7 +22,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = Pegawai::with('user')->get();
+        $pegawai = Pegawai::with(['jabatan', 'user'])->get();
 
         return response()->json([
             'success' => true,

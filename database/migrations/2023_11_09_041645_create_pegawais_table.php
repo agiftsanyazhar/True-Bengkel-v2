@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('alamat');
             $table->string('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('slug');
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->onUpdate('cascade')
