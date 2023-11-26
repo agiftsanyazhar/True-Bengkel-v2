@@ -23,8 +23,8 @@ class AboutSeeder extends Seeder
                 'phone' => '+628' . rand(111111111, 999999999),
                 'opening_hours' => 'Mon-Sat: 8AM-4PM',
                 'closing_hours' => 'Sunday: Closed',
-                'hero_image' => 'uploads/spare-part/pexels-mike-bird-190574.jpg',
-                'about_image' => 'uploads/spare-part/pexels-pixabay-73833.jpg',
+                'hero_image' => 'uploads/about/pexels-mike-bird-190574.jpg',
+                'about_image' => 'uploads/about/pexels-pixabay-73833.jpg',
             ],
         ];
 
