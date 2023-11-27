@@ -16,8 +16,8 @@ class OrderDetailController extends Controller
      */
     public function index($order_id)
     {
-        $orderDetail = OrderDetail::where('order_id', $order_id)->get();
-        $serviceDetail = ServiceDetail::where('order_id', $order_id)->get();
+        $orderDetail = OrderDetail::where('order_id', $order_id)->with('order', 'sparePart')->get();
+        $serviceDetail = ServiceDetail::where('order_id', $order_id)->with('order')->get();
 
         $data = compact('orderDetail', 'serviceDetail');
 

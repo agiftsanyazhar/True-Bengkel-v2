@@ -8,7 +8,6 @@
         <li class="nav-item dropdown dropdown-user-setting">
           <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:void(0)" data-bs-toggle="dropdown">
             <div class="user-setting">
-              {{-- <h6>{{ Auth::user()->email }} <img src="{{ asset('dashboard/images/person.png') }}" class="user-img" alt=""></h6> --}}
               <h6>Nama <img src="{{ asset('dashboard/img/unnamed.jpg') }}" class="user-img" alt=""></h6>
             </div>
           </a>
@@ -43,7 +42,7 @@
             </li>             
             <li><hr class="dropdown-divider"></li>
             <li>
-              <form id="formLogOut" action="{{ route('login') }}" method="GET">
+              <form id="formLogOut" action="{{ route('logout') }}" method="POST">
                 @csrf
               </form>
               <a class="dropdown-item" href="" onclick="event.preventDefault(); getElementById('formLogOut').submit();">

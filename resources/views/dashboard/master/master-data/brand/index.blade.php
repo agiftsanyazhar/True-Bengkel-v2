@@ -32,18 +32,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Yamaha</td>
-                            <td>
-                                <div class="d-flex align-items-center gap-3 fs-6">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
-                                                    data-bs-target="#modalForm"
-                                                    onclick="openFormDialog('modalForm', 'edit', '')"><ion-icon name="pencil-sharp"></ion-icon></button>
-                                        <button type="button" class="btn btn-danger" onclick="deleteDialog('')"><ion-icon name="trash-sharp"></ion-icon></button>
+                            @php($number=1)
+                            @foreach ($brand as $item)
+                            <tr>
+                                <td>{{ $number }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-3 fs-6">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
+                                                        data-bs-target="#modalForm"
+                                                        onclick="openFormDialog('modalForm', 'edit', '')"><ion-icon name="pencil-sharp"></ion-icon></button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteDialog('')"><ion-icon name="trash-sharp"></ion-icon></button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            </tr>
+                            @php($number++)
+                            @endforeach
                         </tr>
                     </tbody>
                 </table>
@@ -60,7 +66,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3" id="formModal" action="" method="POST" enctype="multipart/form-data">
+                    <form class="row g-3" id="formModal" action="{{ route('admin.master.master-data.brand.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
                             <label class="form-label"><b>Name<span class="text-danger text-bold">*</span></b></label>

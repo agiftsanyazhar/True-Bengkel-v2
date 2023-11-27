@@ -2,7 +2,7 @@
 
 @section('container')
   {{-- Hero Section --}}
-  <section id="hero" class="hero d-flex align-items-center" style="background-image: url('{{ '/storage/' . $about->hero_image }}');">
+  <section id="hero" class="hero d-flex align-items-center" style="background-image: url('{{ 'storage/' . $about->hero_image }}');">
     <div class="container">
       <div class="row justify-content-between gy-5">
         <div class="col-md-12 d-flex flex-column justify-content-center align-items-center text-center">
@@ -25,7 +25,7 @@
       </div>
 
       <div class="row gy-5">
-        <div class="col-md-5 about-img" style="background-image: url({{ '/storage/' . $about->about_image }});">
+        <div class="col-md-5 about-img" style="background-image: url({{ 'storage/' . $about->about_image }});">
         </div>
         <div class="col-md-7 d-flex align-items-center">
           <div class="content ps-0 ps-md-5">
@@ -93,7 +93,7 @@
                     <div class="col-md-3 products-item">
                       <a href="{{ route('landing-page.products.detail', ['id' => $subItem->id]) }}">
                         <div class="card">
-                          <img src="{{ '/storage/' . $subItem->image }}" class="card-img-top">
+                          <img src="{{ 'storage/' . $subItem->image }}" class="card-img-top">
                           <div class="card-body">
                             <h4>{{ Str::limit($subItem->name, 20) }}</h4>
                             <p class="description">{{ $subItem->headline }}</p>
@@ -134,7 +134,7 @@
           <div class="col-md-4 d-flex">
             <div class="customer-service-employee">
               <div class="employee-img">
-                <img src="{{  $item->image ? '/storage/' . $item->image : asset('landing-page/img/unnamed.jpg') }}" style="{{ !$item->image ? 'object-fit: contain;' : '' }}" class="img-fluid" alt="">
+                <img src="{{  $item->image ? 'storage/' . $item->image : asset('landing-page/img/unnamed.jpg') }}" style="{{ !$item->image ? 'object-fit: contain;' : '' }}" class="img-fluid" alt="">
               </div>
               <div class="employee-info">
                 <h4>{{ $item->name }}</h4>
@@ -167,7 +167,7 @@
         @foreach ($gallery as $item)
           <div class="col-md-3 products-item">
             <div class="card">
-              <img src="{{ '/storage/' . $item->image }}" class="card-img-top">
+              <img src="{{ 'storage/' . $item->image }}" class="card-img-top">
               <div class="card-body text-center">
                 <h4>{{ $item->name }}</h4>
               </div>

@@ -9,7 +9,7 @@ class LandingPageController extends Controller
 {
     private function getData($endpoint)
     {
-        return Http::get(url('/api/' . $endpoint))->object();
+        return Http::get(url('api/' . $endpoint))->object();
     }
 
     /**
@@ -52,7 +52,7 @@ class LandingPageController extends Controller
     {
         $data['title'] = 'Products Detail';
 
-        $sparePart = Http::get(url('/api/spare-part/detail/' . $id))->object();
+        $sparePart = Http::get(url('api/spare-part/detail/' . $id))->object();
 
         $data['sparePart'] = $sparePart->data[0];
 

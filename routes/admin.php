@@ -42,6 +42,9 @@ Route::prefix('master')->name('master.')->group(function () {
     Route::prefix('master-data')->name('master-data.')->group(function () {
         Route::prefix('brand')->name('brand.')->group(function () {
             Route::get('/', [BrandController::class, 'index'])->name('index');
+            Route::post('/store', [BrandController::class, 'store'])->name('store');
+            // Route::post('/update', [EmailTypeController::class, 'update'])->name('update');
+            // Route::get('/destroy/{id}', [EmailTypeController::class, 'destroy'])->name('destroy');
         });
         Route::prefix('jabatan')->name('jabatan.')->group(function () {
             Route::get('/', [JabatanController::class, 'index'])->name('index');
@@ -62,15 +65,13 @@ Route::prefix('master')->name('master.')->group(function () {
     });
 });
 
-
-
 // --------------------------------------------------------------------------
 // Order
 // --------------------------------------------------------------------------
 Route::prefix('order')->name('order.')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::prefix('order')->name('order.')->group(function () {
-        Route::get('/detail', [OrderDetailController::class, 'index'])->name('detail');
+        Route::get('/detail/{id}', [OrderDetailController::class, 'index'])->name('detail');
     });
 });
 

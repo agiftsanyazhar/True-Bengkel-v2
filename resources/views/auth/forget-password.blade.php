@@ -10,6 +10,31 @@
             <div class="text-center">
               <h4>{{ $title }}</h4>
             </div>
+
+            @if ($errors->any() || session()->has('alert'))
+              <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                {{ $errors->first() ?? session('alert') }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
+
+            @if (session('success'))
+              <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @elseif(session('warning'))
+              <div class="alert alert-warning bg-warning border-0 alert-dismissible fade show" role="alert">
+                {{ session('warning') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @elseif(session('danger'))
+              <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                {{ session('danger') }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
+
             <form class="form-body row g-3" action="{{ route('forget-password.submit') }}" method="GET">
               <div class="col-12">
                 <label for="inputEmail" class="form-label">Email</label>

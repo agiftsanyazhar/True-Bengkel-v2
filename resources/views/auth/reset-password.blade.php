@@ -14,23 +14,29 @@
             </div>
 
             @if ($errors->any() || session()->has('alert'))
-              <div class="alert alert-dismissible fade show py-2 bg-danger">
-                <div class="d-flex align-items-center">
-                  <div class="fs-3 text-white"><ion-icon name="close-circle-sharp"></ion-icon>
-                  </div>
-                  <div class="ms-3">
-                    <div class="text-white">
-                      @if ($errors->any())
-                        {{ $errors->first() }}
-                      @else
-                        {{ session('alert') }}
-                      @endif
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                {{ $errors->first() ?? session('alert') }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
+
+            @if (session('success'))
+              <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @elseif(session('warning'))
+              <div class="alert alert-warning bg-warning border-0 alert-dismissible fade show" role="alert">
+                {{ session('warning') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @elseif(session('danger'))
+              <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+                {{ session('danger') }}
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
+            
             <form class="form-body row g-3" action="{{ route('reset-password.submit') }}" method="GET">
               @csrf
               <div class="col-12">

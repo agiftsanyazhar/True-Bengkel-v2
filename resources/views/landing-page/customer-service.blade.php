@@ -54,7 +54,7 @@
               <div class="col-md-4 position-item position-{{ $item->slug }}">
                 <div class="customer-service-employee">
                   <div class="employee-img">
-                    <img src="{{  $item->image ? '/storage/' . $item->image : asset('landing-page/img/unnamed.jpg') }}" style="{{ !$item->image ? 'object-fit: contain;' : '' }}" class="img-fluid" alt="">
+                    <img src="{{  $item->image ? 'storage/' . $item->image : asset('landing-page/img/unnamed.jpg') }}" style="{{ !$item->image ? 'object-fit: contain;' : '' }}" class="img-fluid" alt="">
                   </div>
                   <div class="employee-info">
                     <h4>{{ $item->name }}</h4>

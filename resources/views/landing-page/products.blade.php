@@ -50,7 +50,7 @@
               <div class="col-md-4 products-item category-{{ $item->slug }}">
                 <a href="{{ route('landing-page.products.detail', ['id' => $item->id]) }}">
                   <div class="card">
-                    <img src="{{ '/storage/' . $item->image }}" class="card-img-top">
+                    <img src="{{ 'storage/' . $item->image }}" class="card-img-top">
                     <div class="card-body">
                       <h4>{{ Str::limit($item->name, 22) }}</h4>
                       <p class="description">{{ $item->headline }}</p>

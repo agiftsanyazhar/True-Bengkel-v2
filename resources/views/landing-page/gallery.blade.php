@@ -14,7 +14,7 @@
         @foreach ($gallery as $item)
           <div class="col-md-3 products-item">
             <div class="card">
-              <img src="{{ '/storage/' . $item->image }}" class="card-img-top">
+              <img src="{{ 'storage/' . $item->image }}" class="card-img-top">
               <div class="card-body text-center">
                 <h4>{{ $item->name }}</h4>
               </div>

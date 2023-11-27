@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Master\MasterData;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BrandController extends Controller
 {
@@ -13,6 +14,10 @@ class BrandController extends Controller
     public function index()
     {
         $data['title'] = 'Brand';
+
+        $brand = Http::get(url('http://true-bengkel-v2.test/api/brand'))->object();
+
+        $data['brand'] = $brand->data;
 
         return view('dashboard.master.master-data.brand.index', $data);
     }

@@ -37,9 +37,10 @@ class AuthenticatedSessionController extends Controller
             $email = $request->email;
             $password = $request->password;
 
-            $response = $this->http->post('http://true-bengkel-v2.test/api/auth/login', [
+            $response = $this->http->post(url('api/auth/login'), [
                 'headers' => [
                     'Accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . session()->get('token.access_token'),
                 ],
                 'form_params' => [
                     'email' => $email,
@@ -66,12 +67,21 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        dd($request);
         try {
-            Http::post(
-                url('/api/login'),
-                [$data]
-            )->object();
+            $request->validate([
+                'token' => 'required|same:' . csrf_token(),
+            ]);
+
+            $user = auth()->user();
+
+            Http::withHeaders([
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer ' . $user->token,
+            ])->post(url('api/auth/logout'));
+
+            $user->token = null;
+
+            $user->save();
 
             $status = 'success';
             $message = 'Welcome!';

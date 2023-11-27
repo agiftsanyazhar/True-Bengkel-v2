@@ -72,20 +72,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php($number=1)
+                        @foreach ($order as $item)
                         <tr>
-                            <td>1</td>
-                            <td>ODR-22112023090241</td>
-                            <td>Rp 120.000</td>
-                            <td>Apr 8, 2021 <span class="badge rounded-pill alert-success">Paid</span></td>
-                            <td><a href="" target="_blank" rel="noopener noreferrer">Download</a></td>
+                            <td>{{ $number }}</td>
+                            <td>{{ $item->order_code }}</td>
+                            <td>Rp {{ number_format($item->total_shopping, 0, ',', '.') }}</td>
+                            <td>{{ date('Y-m-d H:i:s', strtotime($item->created_at)) }} {!! $item->is_paid  == 1 ? '<span class="badge rounded-pill alert-success">Paid</span>' : '<span class="badge rounded-pill alert-danger">Unpaid</span>'  !!}</td>
+                            <td><a href="{{ url('/storage/' . $item->bukti_pembayaran) }}" target="_blank" rel="noopener noreferrer">Download</a></td>
                             <td>
                                 <div class="d-flex align-items-center gap-3 fs-6">
                                     <div class="btn-group">
-                                        <a href="javascript:void(0)" class="btn btn-primary"><ion-icon name="eye-sharp"></ion-icon></a>
+                                        <a href="{{ route('admin.order.order.detail', $item->id) }}" class="btn btn-primary"><ion-icon name="eye-sharp"></ion-icon></a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
+                        @php($number++)
+                        @endforeach
                     </tbody>
                 </table>
             </div>
