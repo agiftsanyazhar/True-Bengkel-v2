@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{
+    Http,
+    Log,
+};
 
 class SparePartController extends Controller
 {
@@ -14,15 +18,15 @@ class SparePartController extends Controller
     {
         $data['title'] = 'Spare Part';
 
-        return view('dashboard.database.spare-part.index', $data);
-    }
+        $sparePart = Http::get(url('http://true-bengkel-v2.test/api/spare-part'))->object();
+        $brand = Http::get(url('http://true-bengkel-v2.test/api/brand'))->object();
+        $tipeMotor = Http::get(url('http://true-bengkel-v2.test/api/tipe-motor'))->object();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $data['sparePart'] = $sparePart->data;
+        $data['listBrand'] = $brand->data;
+        $data['listTipeMotor'] = $tipeMotor->data;
+
+        return view('dashboard.database.spare-part.index', $data);
     }
 
     /**
@@ -30,23 +34,24 @@ class SparePartController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request->only([
+            'spare_part_code', 'name', 'brand_id', 'tipe_motor_id', 'headline',
+            'description', 'stock', 'price',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        try {
+            Http::post(url('http://true-bengkel-v2.test/api/spare-part/store'), $data)->object();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+            $status = 'success';
+            $message = 'Saved Successfully';
+        } catch (\Exception $e) {
+            $status = 'danger';
+            $message = 'Failed to Save. ' . $e->getMessage();
+
+            Log::debug($e->getMessage());
+        }
+
+        return redirect()->back()->with($status, $message);
     }
 
     /**

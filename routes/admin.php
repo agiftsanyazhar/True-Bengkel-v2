@@ -104,6 +104,9 @@ Route::prefix('motor')->name('motor.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('spare-part')->name('spare-part.')->group(function () {
     Route::get('/', [SparePartController::class, 'index'])->name('index');
+    Route::post('/store', [SparePartController::class, 'store'])->name('store');
+    Route::post('/update', [SparePartController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [SparePartController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------

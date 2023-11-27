@@ -27,6 +27,8 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Brand</th>
+                            <th>Tipe Motor</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -36,13 +38,15 @@
                             <tr>
                                 <td>{{ $number }}</td>
                                 <td>{{ $item->name }}</td>
+                                <td>{{ $item->brand->name }}</td>
+                                <td>{{ $item->tipe_motor->name }}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-3 fs-6">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
                                                 data-bs-target="#modalForm"
                                                 onclick="openFormDialog('modalForm', 'edit', '{{ $item->id }}', '{{ $item->name }}')"><ion-icon name="pencil-sharp"></ion-icon></button>
-                                            <button type="button" class="btn btn-danger" onclick="deleteDialog('{{ route('admin.master.master-data.tipe-motor.destroy', $item->id) }}')"><ion-icon name="trash-sharp"></ion-icon></button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteDialog('{{ route('admin.motor.destroy', $item->id) }}')"><ion-icon name="trash-sharp"></ion-icon></button>
                                         </div>
                                     </div>
                                 </td>
@@ -64,12 +68,30 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3" id="formModal" action="{{ route('admin.master.master-data.tipe-motor.store') }}" method="POST">
+                    <form class="row g-3" id="formModal" action="{{ route('admin.motor.store') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
                             <label class="form-label"><b>Name<span class="text-danger text-bold">*</span></b></label>
                             <input class="form-control clear-after" type="hidden" name="id" aria-label="default input example">
                             <input type="text" class="form-control" placeholder="Input Tipe Motor Name" name="name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label"><b>Brand<span class="text-danger text-bold">*</span></b></label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="brand_id" required>
+                                <option value="" disabled selected hidden>Choose Brand</option>
+                                @foreach($listBrand as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label"><b>Tipe Motor<span class="text-danger text-bold">*</span></b></label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="tipe_motor_id" required>
+                                <option value="" disabled selected hidden>Choose Tipe Motor</option>
+                                @foreach($listTipeMotor as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <span class="text-danger text-bold"><b>* Required</b></span>
@@ -90,18 +112,32 @@
                 alertDialog(nameField.name);
                 return;
             }
+            
+            const brandField = document.querySelector('select[name="brand_id"]');
+            if (brandField.value.trim() === '') {
+                alertDialog(brandField.name);
+                return;
+            }
+            
+            const tipeMotorField = document.querySelector('select[name="tipe_motor_id"]');
+            if (tipeMotorField.value.trim() === '') {
+                alertDialog(tipeMotorField.name);
+                return;
+            }
 
             document.getElementById('formModal').submit();
         }
 
         function openFormDialog(target, type, id, name) {
             if (type === 'add') {
-                $('#' + target + ' form').attr('action', '{{ route('admin.master.master-data.tipe-motor.store') }}');
+                $('#' + target + ' form').attr('action', '{{ route('admin.motor.store') }}');
                 $('#' + target + ' .form-control').val('');
                 $('#' + target + ' input[name="name"]').attr('required', 'required');
+                $('#' + target + ' select[name="brand_id"]').attr('required', 'required');
+                $('#' + target + ' select[name="tipe_motor_id"]').attr('required', 'required');
             } else if (type === 'edit') {
                 $('#' + target + ' .clear-after').val('');
-                $('#' + target + ' form').attr('action', '{{ route('admin.master.master-data.tipe-motor.update') }}');
+                $('#' + target + ' form').attr('action', '{{ route('admin.motor.update') }}');
                 $('#' + target + ' .clear-after[name="id"]').val(id);
                 $('#' + target + ' input[name="name"]').val(name);
             }

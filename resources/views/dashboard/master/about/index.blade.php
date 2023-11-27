@@ -130,7 +130,7 @@
                             <label for="formFile" class="form-label"><b>Choose About Image<span class="text-danger text-bold">*</span></b></label>
                             <input class="form-control clear-after" type="file" id="formFile" name="about_image" required>
                             <small class="text-danger">
-                                <b>- Max. 2 MB</b><br>
+                                <b>- Max. 2 MB</b>
                             </small>
                         </div>
 

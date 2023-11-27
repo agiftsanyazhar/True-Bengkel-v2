@@ -55,8 +55,8 @@ class SparePartRequest extends FormRequest
         try {
             $data = $this->validated();
 
-            $brand = Brand::findOrFail($data['brand_id']);
-            $data['slug'] = Str::slug($brand->name) . '-spare-part';
+            $sparePart = SparePart::findOrFail($data['brand_id']);
+            $data['slug'] = Str::slug($sparePart->name) . '-spare-part';
 
             if ($request->hasFile('image')) {
                 $imageName = $request->file('image');
