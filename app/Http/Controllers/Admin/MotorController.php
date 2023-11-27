@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{
+    Http,
+    Log,
+};
 
 class MotorController extends Controller
 {
@@ -13,6 +17,10 @@ class MotorController extends Controller
     public function index()
     {
         $data['title'] = 'Motor';
+
+        $motor = Http::get(url('http://true-bengkel-v2.test/api/motor'))->object();
+
+        $data['motor'] = $motor->data;
 
         return view('dashboard.database.motor.index', $data);
     }

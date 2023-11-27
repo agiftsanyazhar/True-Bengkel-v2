@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -44,14 +44,22 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
 
-        $success = true;
-        $message = 'Success';
+        try {
+            auth()->logout();
+
+            auth()->logout(true);
+
+            $success = true;
+            $message = 'Success';
+        } catch (\Exception $e) {
+            $success = false;
+            $message = 'Failure';
+        }
 
         return response()->json([
             'success' => $success,
             'message' => $message,
-        ], 200);
+        ]);
     }
 }

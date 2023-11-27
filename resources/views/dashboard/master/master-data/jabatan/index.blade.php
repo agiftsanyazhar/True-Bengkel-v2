@@ -33,22 +33,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Kepala Bangkel</td>
-                            <td>Rp 10.000.000</td>
-                            <td>Rp 5.000.000</td>
-                            <td>
-                                <div class="d-flex align-items-center gap-3 fs-6">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
-                                                    data-bs-target="#modalForm"
-                                                    onclick="openFormDialog('modalForm', 'edit', '')"><ion-icon name="pencil-sharp"></ion-icon></button>
-                                        <button type="button" class="btn btn-danger" onclick="deleteDialog('')"><ion-icon name="trash-sharp"></ion-icon></button>
+                        @php($number=1)
+                        @foreach ($jabatan as $item)
+                            <tr>
+                                <td>{{ $number }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->gaji_pokok }}</td>
+                                <td>{{ $item->tunjangan }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-3 fs-6">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
+                                                data-bs-target="#modalForm"
+                                                onclick="openFormDialog('modalForm', 'edit', '{{ $item->id }}', '{{ $item->name }}', '{{ $item->gaji_pokok }}', '{{ $item->tunjangan }}')"><ion-icon name="pencil-sharp"></ion-icon></button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteDialog('{{ route('admin.master.master-data.jabatan.destroy', $item->id) }}')"><ion-icon name="trash-sharp"></ion-icon></button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        @php($number++)
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -64,12 +68,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3" id="formModal" action="" method="POST" enctype="multipart/form-data">
+                    <form class="row g-3" id="formModal" action="{{ route('admin.master.master-data.jabatan.store') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
                             <label class="form-label"><b>Name<span class="text-danger text-bold">*</span></b></label>
                             <input class="form-control clear-after" type="hidden" name="id" aria-label="default input example">
-                            <input type="text" class="form-control" placeholder="Input Brand Name" name="name" required>
+                            <input type="text" class="form-control" placeholder="Input Jabatan Name" name="name" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label"><b>Gaji Pokok<span class="text-danger text-bold">*</span></b></label>
@@ -77,7 +81,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label"><b>Tunjangan</b></label>
-                            <input type="number" class="form-control" min="1" placeholder="Input Tunjangan" name="tunjangan">
+                            <input type="number" class="form-control" min="0" placeholder="Input Tunjangan" name="tunjangan">
                         </div>
 
                         <span class="text-danger text-bold"><b>* Required</b></span>
@@ -90,4 +94,41 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function saveForm() {
+            const nameField = document.querySelector('input[name="name"]');
+            if (nameField.value.trim() === '') {
+                alertDialog(nameField.name);
+                return;
+            }
+            
+            const gajiPokokField = document.querySelector('input[name="gaji_pokok"]');
+            if (gajiPokokField.value.trim() === '') {
+                alertDialog(gajiPokokField.name);
+                return;
+            }
+
+            document.getElementById('formModal').submit();
+        }
+
+        function openFormDialog(target, type, id, name, gaji_pokok, tunjangan) {
+            if (type === 'add') {
+                $('#' + target + ' form').attr('action', '{{ route('admin.master.master-data.jabatan.store') }}');
+                $('#' + target + ' .form-control').val('');
+                $('#' + target + ' input[name="name"]').attr('required', 'required');
+                $('#' + target + ' input[name="gaji_pokok"]').attr('required', 'required');
+                $('#' + target + ' input[name="tunjangan"]');
+            } else if (type === 'edit') {
+                $('#' + target + ' .clear-after').val('');
+                $('#' + target + ' form').attr('action', '{{ route('admin.master.master-data.jabatan.update') }}');
+                $('#' + target + ' .clear-after[name="id"]').val(id);
+                $('#' + target + ' input[name="name"]').val(name);
+                $('#' + target + ' input[name="gaji_pokok"]').val(gaji_pokok);
+                $('#' + target + ' input[name="tunjangan"]').val(tunjangan);
+            }
+            $('#' + target).modal('toggle');
+            $('#' + target).attr('data-operation-type', type);
+        }
+    </script>
 @endsection

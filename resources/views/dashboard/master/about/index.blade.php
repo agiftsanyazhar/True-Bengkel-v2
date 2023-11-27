@@ -20,50 +20,56 @@
                 <h5 class="mb-0">{{ $title }}</h5>
             </div>
             <div class="row g-3 mt-2">
-                <div class="col-md-6">
-                    <label class="form-label"><b>Name</b></label>
-                    <input type="text" class="form-control" value="" disabled>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label"><b>Opening Hours</b></label>
-                    <input type="text" class="form-control" value="" disabled>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>Email</b></label>
-                    <input type="email" class="form-control" value="" disabled>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>Phone</b></label>
-                    <input type="number" class="form-control" value="" disabled>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>Location</b></label>
-                    <input type="text" class="form-control" value="" disabled>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>Headline</b></label>
-                    <textarea class="form-control" rows="5" disabled></textarea>
-                </div>
-                <div class="col-md-8">
-                    <label class="form-label"><b>About</b></label>
-                    <textarea class="form-control" rows="5" disabled></textarea>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>Hero Image</b></label>
-                    <img src="{{ asset('landing-page/img/pexels-lisa-fotios-115558.jpg') }}" class="img-dashboard">
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>About Image</b></label>
-                    <img src="{{ asset('landing-page/img/pexels-lisa-fotios-115558.jpg') }}" class="img-dashboard">
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label"><b>Map</b></label>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16673.13208541504!2d112.7937557!3d-7.275847100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa10ea2ae883%3A0xbe22c55d60ef09c7!2sPoliteknik%20Elektronika%20Negeri%20Surabaya!5e1!3m2!1sid!2sus!4v1696674447535!5m2!1sid!2sus" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modalForm"
-                        onclick="openFormDialog('modalForm', 'add')"><ion-icon name="pencil-sharp"></ion-icon></button>
-                </div>
+                @foreach ($about as $item)
+                    <div class="col-md-6">
+                        <label class="form-label"><b>Name</b></label>
+                        <input type="text" class="form-control" value="{{ $item->name }}" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label"><b>Opening Hours</b></label>
+                        <input type="text" class="form-control" value="{{ $item->opening_hours }}; {{ $item->closing_hours }}" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>Email</b></label>
+                        <input type="email" class="form-control" value="{{ $item->email }}" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>Phone</b></label>
+                        <input type="number" class="form-control" value="{{ $item->phone }}" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>Location</b></label>
+                        <input type="text" class="form-control" value="{{ $item->location }}" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>Headline</b></label>
+                        <textarea class="form-control" rows="5" disabled>{{ $item->headline }}</textarea>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label"><b>About</b></label>
+                        <textarea class="form-control" rows="5" disabled>{{ $item->description }}</textarea>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>Hero Image</b></label>
+                        <div>
+                            <img src="{{ '/storage/' . $item->hero_image }}" class="img-dashboard">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>About Image</b></label>
+                        <div>
+                            <img src="{{ '/storage/' . $item->about_image }}" class="img-dashboard">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label"><b>Map</b></label>
+                        {!! $item->map !!}
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modalForm"
+                            onclick="openFormDialog('modalForm', 'add', {{ json_encode($about) }})"><ion-icon name="pencil-sharp"></ion-icon></button>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -82,27 +88,27 @@
                         <div class="col-md-4">
                             <label class="form-label"><b>Name<span class="text-danger text-bold">*</span></b></label>
                             <input class="form-control clear-after" type="hidden" name="id" aria-label="default input example">
-                            <input type="text" class="form-control" placeholder="Input Brand Name" name="name" required>
+                            <input type="text" class="form-control clear-after" placeholder="Input Name" name="name" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"><b>Opening Hours<span class="text-danger text-bold">*</span></b></label>
-                            <input type="text" class="form-control" placeholder="Input Opening Hours" name="opening_hours" required>
+                            <input type="text" class="form-control clear-after" placeholder="Input Opening Hours" name="opening_hours" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"><b>Closing Hours<span class="text-danger text-bold">*</span></b></label>
-                            <input type="text" class="form-control" placeholder="Input Closing Hours" name="closing_hours" required>
+                            <input type="text" class="form-control clear-after" placeholder="Input Closing Hours" name="closing_hours" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"><b>Email<span class="text-danger text-bold">*</span></b></label>
-                            <input type="text" class="form-control" placeholder="Input Email" name="email" required>
+                            <input type="text" class="form-control clear-after" placeholder="Input Email" name="email" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"><b>Phone<span class="text-danger text-bold">*</span></b></label>
-                            <input type="text" class="form-control" placeholder="Input Phone" name="phone" required>
+                            <input type="text" class="form-control clear-after" placeholder="Input Phone" name="phone" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"><b>Location<span class="text-danger text-bold">*</span></b></label>
-                            <input type="text" class="form-control" placeholder="Input Location" name="location" required>
+                            <input type="text" class="form-control clear-after" placeholder="Input Location" name="location" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"><b>Headline<span class="text-danger text-bold">*</span></b></label>
@@ -115,14 +121,14 @@
                         </div>
                         <div class="col-md-6">
                             <label for="formFile" class="form-label"><b>Choose Hero Image<span class="text-danger text-bold">*</span></b></label>
-                            <input class="form-control" type="file" id="formFile" name="hero_image">
+                            <input class="form-control clear-after" type="file" id="formFile" name="hero_image" required>
                             <small class="text-danger">
                                 <b>- Max. 2 MB</b><br>
                             </small>
                         </div>
                         <div class="col-md-6">
                             <label for="formFile" class="form-label"><b>Choose About Image<span class="text-danger text-bold">*</span></b></label>
-                            <input class="form-control" type="file" id="formFile" name="about_image">
+                            <input class="form-control clear-after" type="file" id="formFile" name="about_image" required>
                             <small class="text-danger">
                                 <b>- Max. 2 MB</b><br>
                             </small>
@@ -138,4 +144,37 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function saveForm() {
+            const nameField = document.querySelector('input[name="name"]');
+            if (nameField.value.trim() === '') {
+                alertDialog(nameField.name);
+                return;
+            }
+
+            document.getElementById('formModal').submit();
+        }
+
+        function openFormDialog(target, type, id, name) {
+            if (type === 'edit') {
+                const item = data[0];
+                $('#' + target + ' .clear-after').val('');
+                $('#' + target + ' form').attr('action', '{{ route('admin.master.master-data.tipe-motor.update') }}');
+                $('#' + target + ' .clear-after[name="id"]').val(id);
+                $('#' + target + ' input[name="name"]').val(name);
+                $('#' + target + ' input[name="opening_hours"]').val(opening_hours);
+                $('#' + target + ' input[name="closing_hours"]').val(closing_hours);
+                $('#' + target + ' input[name="email"]').val(email);
+                $('#' + target + ' input[name="phone"]').val(phone);
+                $('#' + target + ' input[name="location"]').val(location);
+                $('#' + target + ' textarea[name="headline"]').val(headline);
+                $('#' + target + ' textarea[name="map"]').val(map);
+                $('#' + target + ' input[name="hero_image"]').val(hero_image);
+                $('#' + target + ' input[name="about_image"]').val(about_image);
+            }
+            $('#' + target).modal('toggle');
+            $('#' + target).attr('data-operation-type', type);
+        }
+    </script>
 @endsection

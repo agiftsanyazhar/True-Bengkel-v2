@@ -31,9 +31,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @php($number=1)
-                            @foreach ($brand as $item)
+                        @php($number=1)
+                        @foreach ($brand as $item)
                             <tr>
                                 <td>{{ $number }}</td>
                                 <td>{{ $item->name }}</td>
@@ -41,16 +40,15 @@
                                     <div class="d-flex align-items-center gap-3 fs-6">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal"
-                                                        data-bs-target="#modalForm"
-                                                        onclick="openFormDialog('modalForm', 'edit', '')"><ion-icon name="pencil-sharp"></ion-icon></button>
-                                            <button type="button" class="btn btn-danger" onclick="deleteDialog('')"><ion-icon name="trash-sharp"></ion-icon></button>
+                                                data-bs-target="#modalForm"
+                                                onclick="openFormDialog('modalForm', 'edit', '{{ $item->id }}', '{{ $item->name }}')"><ion-icon name="pencil-sharp"></ion-icon></button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteDialog('{{ route('admin.master.master-data.brand.destroy', $item->id) }}')"><ion-icon name="trash-sharp"></ion-icon></button>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            @php($number++)
-                            @endforeach
-                        </tr>
+                        @php($number++)
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -66,7 +64,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3" id="formModal" action="{{ route('admin.master.master-data.brand.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="row g-3" id="formModal" action="{{ route('admin.master.master-data.brand.store') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
                             <label class="form-label"><b>Name<span class="text-danger text-bold">*</span></b></label>
@@ -84,4 +82,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function saveForm() {
+            const nameField = document.querySelector('input[name="name"]');
+            if (nameField.value.trim() === '') {
+                alertDialog(nameField.name);
+                return;
+            }
+
+            document.getElementById('formModal').submit();
+        }
+
+        function openFormDialog(target, type, id, name) {
+            if (type === 'add') {
+                $('#' + target + ' form').attr('action', '{{ route('admin.master.master-data.brand.store') }}');
+                $('#' + target + ' .form-control').val('');
+                $('#' + target + ' input[name="name"]').attr('required', 'required');
+            } else if (type === 'edit') {
+                $('#' + target + ' .clear-after').val('');
+                $('#' + target + ' form').attr('action', '{{ route('admin.master.master-data.brand.update') }}');
+                $('#' + target + ' .clear-after[name="id"]').val(id);
+                $('#' + target + ' input[name="name"]').val(name);
+            }
+            $('#' + target).modal('toggle');
+            $('#' + target).attr('data-operation-type', type);
+        }
+    </script>
 @endsection

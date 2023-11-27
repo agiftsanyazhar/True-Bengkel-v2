@@ -61,6 +61,16 @@
     <script src="{{ asset('dashboard/js/main.js') }}"></script>
 
     <script>
+      function alertDialog(name = '') {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Warning!',
+          text: name + ' is Required',
+          confirmButtonColor: '#6c757d',
+          confirmButtonText: 'Close',
+        })
+      }
+      
       function deleteDialog(url, name = '') {
         if (name == '')
           name = 'this';

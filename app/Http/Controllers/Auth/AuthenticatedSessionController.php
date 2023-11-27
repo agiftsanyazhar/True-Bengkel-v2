@@ -37,11 +37,7 @@ class AuthenticatedSessionController extends Controller
             $email = $request->email;
             $password = $request->password;
 
-            $response = $this->http->post(url('api/auth/login'), [
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'Authorization' => 'Bearer ' . session()->get('token.access_token'),
-                ],
+            $this->http->post(url('api/auth/login'), [
                 'form_params' => [
                     'email' => $email,
                     'password' => $password,
@@ -65,28 +61,10 @@ class AuthenticatedSessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy()
     {
         try {
-            $request->validate([
-                'token' => 'required|same:' . csrf_token(),
-            ]);
-
-            $user = auth()->user();
-
-            Http::withHeaders([
-                'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . $user->token,
-            ])->post(url('api/auth/logout'));
-
-            $user->token = null;
-
-            $user->save();
-
-            $status = 'success';
-            $message = 'Welcome!';
-
-            return redirect('/login')->with($status, $message);
+            $logout = $this->http->post(url('api/auth/logout'));
         } catch (\Exception $e) {
             $status = 'danger';
             $message = 'Sorry! Try again later. ' . $e->getMessage();
@@ -94,6 +72,10 @@ class AuthenticatedSessionController extends Controller
             Log::error($e->getMessage());
 
             return redirect()->back()->with($status, $message);
+        }
+
+        if ($logout->success == true) {
+            return redirect('/login');
         }
     }
 }

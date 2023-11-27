@@ -20,7 +20,7 @@ class AboutSeeder extends Seeder
                 'location' => 'Institut Teknologi Sepuluh Nopember, Kampus Jl. Raya ITS, Keputih, Kec. Sukolilo, Surabaya, Jawa Timur 60111, Indonesia',
                 'map' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16673.13208541504!2d112.7937557!3d-7.275847100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa10ea2ae883%3A0xbe22c55d60ef09c7!2sPoliteknik%20Elektronika%20Negeri%20Surabaya!5e1!3m2!1sid!2sus!4v1696674447535!5m2!1sid!2sus" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
                 'email' => 'contact@true-bengkel.com',
-                'phone' => '+628' . rand(111111111, 999999999),
+                'phone' => '628' . rand(111111111, 999999999),
                 'opening_hours' => 'Mon-Sat: 8AM-4PM',
                 'closing_hours' => 'Sunday: Closed',
                 'hero_image' => 'uploads/about/pexels-mike-bird-190574.jpg',

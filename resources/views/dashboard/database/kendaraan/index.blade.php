@@ -33,15 +33,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>792347</td>
-                            <td>Tiger Nixon</td>
-                            <td>Yamaha / Scooter</td>
-                            <td>OIHOFH8092384</td>
-                            <td>SGDSDF89743KJ</td>
-                            <td>2023 / Hitam</td>
-                        </tr>
+                        @php($number=1)
+                        @foreach ($kendaraan as $item)
+                            <tr>
+                                <td>{{ $number }}</td>
+                                <td>{{ $item->pelanggan->name }}</td>
+                                <td>{{ $item->stnk }}</td>
+                                <td>{{ $item->brand->name }} / {{ $item->tipe_motor->name }}</td>
+                                <td>{{ $item->no_mesin }}</td>
+                                <td>{{ $item->no_rangka }}</td>
+                                <td>{{ $item->tahun }} {{ $item->warna }}</td>
+                            </tr>
+                        @php($number++)
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -22,27 +22,10 @@
                   </div>
                 </div>
               </a>
-            </li>
+            </li>     
             <li><hr class="dropdown-divider"></li>
             <li>
-              <a class="dropdown-item" href="pages-user-profile.html">
-                  <div class="d-flex align-items-center">
-                    <div><ion-icon name="person-outline"></ion-icon></div>
-                    <div class="ms-3"><span>Profile</span></div>
-                  </div>
-                </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">
-                <div class="d-flex align-items-center">
-                  <div><ion-icon name="settings-outline"></ion-icon></div>
-                  <div class="ms-3"><span>Setting</span></div>
-                </div>
-              </a>
-            </li>             
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <form id="formLogOut" action="{{ route('logout') }}" method="POST">
+              <form id="formLogOut" action="{{ url('http://true-bengkel-v2.test/api/auth/logout') }}" method="POST">
                 @csrf
               </form>
               <a class="dropdown-item" href="" onclick="event.preventDefault(); getElementById('formLogOut').submit();">

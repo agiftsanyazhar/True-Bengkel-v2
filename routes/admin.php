@@ -43,20 +43,27 @@ Route::prefix('master')->name('master.')->group(function () {
         Route::prefix('brand')->name('brand.')->group(function () {
             Route::get('/', [BrandController::class, 'index'])->name('index');
             Route::post('/store', [BrandController::class, 'store'])->name('store');
-            // Route::post('/update', [EmailTypeController::class, 'update'])->name('update');
-            // Route::get('/destroy/{id}', [EmailTypeController::class, 'destroy'])->name('destroy');
+            Route::post('/update', [BrandController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [BrandController::class, 'destroy'])->name('destroy');
         });
         Route::prefix('jabatan')->name('jabatan.')->group(function () {
             Route::get('/', [JabatanController::class, 'index'])->name('index');
+            Route::post('/store', [JabatanController::class, 'store'])->name('store');
+            Route::post('/update', [JabatanController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [JabatanController::class, 'destroy'])->name('destroy');
         });
         Route::prefix('tipe-motor')->name('tipe-motor.')->group(function () {
             Route::get('/', [TipeMotorController::class, 'index'])->name('index');
+            Route::post('/store', [TipeMotorController::class, 'store'])->name('store');
+            Route::post('/update', [TipeMotorController::class, 'update'])->name('update');
+            Route::get('/destroy/{id}', [TipeMotorController::class, 'destroy'])->name('destroy');
         });
     });
 
     // About
     Route::prefix('about')->name('about.')->group(function () {
         Route::get('/', [AboutController::class, 'index'])->name('index');
+        Route::post('/update', [AboutController::class, 'update'])->name('update');
     });
 
     // Gallery
@@ -87,6 +94,9 @@ Route::prefix('kendaraan')->name('kendaraan.')->group(function () {
 // --------------------------------------------------------------------------
 Route::prefix('motor')->name('motor.')->group(function () {
     Route::get('/', [MotorController::class, 'index'])->name('index');
+    Route::post('/store', [MotorController::class, 'store'])->name('store');
+    Route::post('/update', [MotorController::class, 'update'])->name('update');
+    Route::get('/destroy/{id}', [MotorController::class, 'destroy'])->name('destroy');
 });
 
 // --------------------------------------------------------------------------

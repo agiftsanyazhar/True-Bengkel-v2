@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex align-items-center">
-                <h5 class="mb-0">Recent Orders <a href="{{ route('admin.order.index') }}" class="btn btn-primary">Show All</a></h5>
+                <h5 class="mb-0">{{ $title }}</h5>
             </div>
             <div class="table-responsive mt-4">
                 <table id="example" class="table table-striped table-bordered" style="width:100%">

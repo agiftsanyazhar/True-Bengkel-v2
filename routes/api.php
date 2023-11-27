@@ -256,7 +256,7 @@ Route::prefix('user')->name('user.')->group(function () {
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/login', AuthenticatedSessionController::class)->name('login');
     Route::post('/register', RegisterController::class)->name('register');
-    Route::post('/logout', AuthenticatedSessionController::class)
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
         // ->middleware('auth:sanctum')
-        ->name('destroy');
+        ->name('logout');
 });
